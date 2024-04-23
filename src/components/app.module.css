@@ -1,0 +1,9 @@
+.title {
+    font-family: Ferry;
+    background-color: slateblue;
+}
+
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+}

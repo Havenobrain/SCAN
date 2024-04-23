@@ -1,8 +1,14 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+}
+
 @font-face {
     font-family: Ferry;
     src: url(./assets/fonts/ferry_black.otf);
-}
-
-.h1 {
-    font-family: "Ferry";
 }

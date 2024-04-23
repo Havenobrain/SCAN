@@ -1,0 +1,12 @@
+.title {
+    font-family: Ferry;
+    font-weight: 900;
+    font-size: 45px;
+    line-height: 54px;
+    letter-spacing: 1%;
+}
+
+.line {
+    display: flex;
+    gap: 30px;
+}
