@@ -4,9 +4,15 @@
     font-size: 45px;
     line-height: 54px;
     letter-spacing: 1%;
+    margin-bottom: 70px;
 }
 
 .line {
     display: flex;
     gap: 30px;
+    margin-bottom: 70px;
+}
+
+.root {
+    margin-bottom: 100px;
 }

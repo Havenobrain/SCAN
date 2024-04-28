@@ -1,0 +1,45 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    align-items: center;
+}
+
+.logo {
+    background-color: slateblue;
+    height: 30px;
+    width: 100px;
+}
+
+.links {
+    display: flex;
+    gap: 50px;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    gap: 8px;
+
+    background-color: #d9d9d944;
+    border-radius: 5px 0px 0px 0px;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12.1px;
+    padding: 15px 10px;
+    border-radius: 5px;
+}
+
+.profile {
+    display: flex;
+    gap: 4px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
