@@ -1,4 +1,6 @@
 import timerPath from "../../assets/img/timer.png";
+import searchPath from "../../assets/img/search.png";
+import securityPath from "../../assets/img/security.png";
 import css from "./card.module.css";
 
 type CardProps = {
@@ -11,6 +13,13 @@ export function Card(props: CardProps) {
         if (props.image === "timer") {
             return <img className={css.icon} src={timerPath} alt="" />;
         }
+        if (props.image === "search") {
+            return <img className={css.icon} src={searchPath} alt="" />;
+        }
+        if (props.image === "security") {
+            return <img className={css.icon} src={securityPath} alt="" />;
+        }
+
     }
 
     return (

@@ -7,8 +7,8 @@ export function WhyExactlyWe() {
             <h1 className={css.title}>Почему именно мы</h1>
             <div className={css.line}>
                 <Card image="timer" text="Высокая и оперативная скорость обработки заявки" />
-                <Card image="search" />
-                <Card image="security" />
+                <Card image="search" text="Огромная комплексная база данных, обеспечивающая объективный ответ на запрос" />
+                <Card image="security" text="Защита конфеденциальных сведений, не подлежащих разглашению по федеральному законодательству" />
             </div>
         </div>
     );

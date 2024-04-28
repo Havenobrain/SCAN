@@ -14,7 +14,7 @@ export function Button(props: ButtonProps) {
 
     return (
         <button onClick={onClick} style={{ color: props.color }}>
-            Запросить данные {props.text} {props.number}
+            Запросить данные {props.text} {props.number} 
         </button>
     );
 }

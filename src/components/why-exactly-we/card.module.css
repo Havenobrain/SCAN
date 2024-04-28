@@ -7,4 +7,10 @@
 
 .icon {
     margin-bottom: 20px;
+    height: 64px;
+    width: 64px;
+}
+
+.title {
+    font-family: Ferry;
 }

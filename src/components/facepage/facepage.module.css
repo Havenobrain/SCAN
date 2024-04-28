@@ -1,0 +1,12 @@
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+.title {
+    font-family: Ferry;
+}
+
+.icon {
+    float: right
+}
