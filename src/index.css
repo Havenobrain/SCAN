@@ -13,6 +13,11 @@ body {
     src: url(./assets/fonts/ferry_black.otf);
 }
 
+@font-face {
+    font-family: Inter;
+    src: url(./assets/fonts/inter.ttf);
+}
+
 li {
     list-style-type: none;
     /* list-style-position: inside; */

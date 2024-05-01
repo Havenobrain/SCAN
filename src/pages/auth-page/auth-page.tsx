@@ -1,6 +1,9 @@
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header/header";
 import characters from "../../assets/img/Characters.png";
+import facebook from "../../assets/img/facebook.png";
+import google from "../../assets/img/google.png";
+import yandex from "../../assets/img/yandex.png";
 import css from "./auth-page.module.css";
 import locker from "../../assets/img/locker.png";
 
@@ -34,9 +37,15 @@ export function AuthPage() {
                         <p className={css.reset}>Восстановить пароль</p>
                         <p className={css.signInText}>Войти через:</p>
                         <div className={css.socials}>
-                            <div className={css.social}>Google</div>
-                            <div className={css.social}>Google</div>
-                            <div className={css.social}>Google</div>
+                            <div className={css.social}>
+                                <img src={google} alt="" />
+                            </div>
+                            <div className={css.social}>
+                                <img src={facebook} alt="" />
+                            </div>
+                            <div className={css.social}>
+                                <img src={yandex} alt="" />
+                            </div>
                         </div>
                     </form>
                 </div>
