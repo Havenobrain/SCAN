@@ -1,8 +1,6 @@
 import css from "./business-card.module.css";
 
-type Props = {};
-
-export function BusinessCard(props: Props) {
+export function BusinessCard() {
     return (
         <div className={css.root}>
             <div className={css.header}>
@@ -10,12 +8,13 @@ export function BusinessCard(props: Props) {
                 <div className={css.subtitle}>Для корпоративных клиентов</div>
             </div>
             <div className={css.content}>
-
                 <p>
                     <span className={css.newPrice}>2 379 ₽</span>
                     <span className={css.oldPrice}>3 700 ₽</span>
                 </p>
-                <p className={css.text} style={{ marginBottom: 10 }}>В тариф входит:</p>
+                <p className={css.text} style={{ marginBottom: 10 }}>
+                    В тариф входит:
+                </p>
                 <ul>
                     <li className={css.li}>Все пункты тарифа Pro</li>
                     <li className={css.li}>Безлимитное количество запросов</li>

@@ -1,0 +1,32 @@
+.root {
+    position: relative;
+    border: 1px solid #000;
+}
+
+.popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border: 1px solid #000;
+    width: 100%;
+    padding: 8px;
+    background-color: rgb(202, 195, 248);
+    border-radius: 8px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.triangle {
+    transition: all 0.3s ease 0s;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #ff4532 transparent;
+    transform: rotate(0deg);
+}

@@ -1,8 +1,6 @@
 import css from "./pro-card.module.css";
 
-type Props = {};
-
-export function ProCard(props: Props) {
+export function ProCard() {
     return (
         <div className={css.root}>
             <div className={css.header}>
@@ -15,11 +13,13 @@ export function ProCard(props: Props) {
                     <span className={css.oldPrice}>2 600 ₽</span>
                 </p>
                 <p className={css.text}>или 279 ₽/мес. при рассрочке на 24 мес.</p>
-                <p className={css.text} style={{ marginBottom: 10 }}>В тариф входит:</p>
+                <p className={css.text} style={{ marginBottom: 10 }}>
+                    В тариф входит:
+                </p>
                 <ul>
                     <li className={css.li}>Все пункты тарифа Beginner</li>
                     <li className={css.li}>Экспорт истории</li>
-                    <li className={css.li}>Рекмоендации по приоритетам</li>
+                    <li className={css.li}>Рекомендации по приоритетам</li>
                 </ul>
                 <button className={css.button}>Подробнее</button>
             </div>

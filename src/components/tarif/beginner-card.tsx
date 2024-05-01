@@ -1,8 +1,6 @@
 import css from "./beginner-card.module.css";
 
-type Props = {};
-
-export function BeginnerCard(props: Props) {
+export function BeginnerCard() {
     return (
         <div className={css.root}>
             <div className={css.header}>
@@ -16,7 +14,9 @@ export function BeginnerCard(props: Props) {
                     <span className={css.oldPrice}>1 200 ₽</span>
                 </p>
                 <p className={css.text}>или 150 ₽/мес. при рассрочке на 24 мес.</p>
-                <p className={css.text} style={{ marginBottom: 10 }}>В тариф входит:</p>
+                <p className={css.text} style={{ marginBottom: 10 }}>
+                    В тариф входит:
+                </p>
                 <ul>
                     <li className={css.li}>Безлимитная история запросов</li>
                     <li className={css.li}>Безопасная сделка</li>
