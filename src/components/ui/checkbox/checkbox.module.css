@@ -1,0 +1,19 @@
+.checkbox {
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+    border: 1px solid #000;
+}
+
+.photo {
+    opacity: 0;
+    transition: all 0.3s ease 0s;
+}
+
+.input {
+    display: none;
+}
+
+.input:checked ~ .checkbox .photo {
+    opacity: 1;
+}

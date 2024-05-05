@@ -1,8 +1,8 @@
-import css from "./header.module.css";
-import avatar from "../../assets/img/avatar.jpg";
-import { Link } from "react-router-dom";
+import css from "./header.module.css"
+import avatar from "../../assets/img/avatar.jpg"
+import { Link } from "react-router-dom"
 
-export function Header(props: Props) {
+export function Header() {
     return (
         <div className={css.root}>
             <div className={css.logo}></div>
@@ -27,5 +27,5 @@ export function Header(props: Props) {
                 <img src={avatar} alt="" className={css.avatar} />
             </div>
         </div>
-    );
+    )
 }
