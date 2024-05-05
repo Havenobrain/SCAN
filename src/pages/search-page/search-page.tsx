@@ -17,7 +17,7 @@ export function SearchPage() {
             <div className={css.container}>
                 <div className={css.root}>
                     <h1 className={css.title}>Найдите необходимые данные в пару кликов</h1>
-                    <h1>Задайте параметры поиска. Чем больше заполните, тем точнее поиск</h1>
+                    <h1 className={css.label}> Задайте параметры поиска. Чем больше заполните, тем точнее поиск</h1>
                     <img src={rocket} alt="" />
                     <div>
                         <form className={css.form}>
@@ -29,7 +29,14 @@ export function SearchPage() {
                                 </label>
                                 <label>
                                     <p className={css.label}>Тональность</p>
-                                    <input className={css.input} type="list" />
+                                    <div className={css.label}>
+                                    <Dropdown
+                                    onSelect={(item) => setTonality(item)}
+                                    label="Тональность"
+                                    suggestions={["Любая", "Положительная", "Отрицательная"]}
+                                    selectedItem={tonality}
+                                    />
+                                    </div>
                                 </label>
                                 <label>
                                     <p className={css.label}>Количество документов в выдаче</p>
@@ -47,11 +54,25 @@ export function SearchPage() {
                                     label="Упоминания в бизнес-контексте"
                                     onChange={(ev) => setMentions(ev.target.checked)}
                                 />
-                                <Dropdown
-                                    onSelect={(item) => setTonality(item)}
-                                    label="Тональность"
-                                    suggestions={["Любая", "-", "+"]}
-                                    selectedItem={tonality}
+                                <Checkbox
+                                    label="Главная роль в публикации"
+                                    onChange={(ev) => setMentions(ev.target.checked)}
+                                />
+                                <Checkbox
+                                    label="Публикации только с риск-факторами"
+                                    onChange={(ev) => setMentions(ev.target.checked)}
+                                />
+                                <Checkbox
+                                    label="Включать технические новости рынков"
+                                    onChange={(ev) => setMentions(ev.target.checked)}
+                                />
+                                <Checkbox
+                                    label="Включать анонсы и календари"
+                                    onChange={(ev) => setMentions(ev.target.checked)}
+                                />
+                                <Checkbox
+                                    label="Включать сводки новостей"
+                                    onChange={(ev) => setMentions(ev.target.checked)}
                                 />
                             </div>
                             <button

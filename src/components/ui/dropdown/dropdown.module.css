@@ -1,6 +1,7 @@
 .root {
     position: relative;
-    border: 1px solid #000;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
 }
 
 .popover {
@@ -10,7 +11,7 @@
     border: 1px solid #000;
     width: 100%;
     padding: 8px;
-    background-color: rgb(202, 195, 248);
+    background-color: rgb(155, 153, 170);
     border-radius: 8px;
 }
 
@@ -27,6 +28,8 @@
     height: 0px;
     border-style: solid;
     border-width: 0 10px 10px 10px;
-    border-color: transparent transparent #ff4532 transparent;
+    border-color: transparent transparent #D9D9D9 transparent;
     transform: rotate(0deg);
+
 }
+

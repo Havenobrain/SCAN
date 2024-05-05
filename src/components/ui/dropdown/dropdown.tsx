@@ -1,6 +1,7 @@
 import { useState } from "react";
 import css from "./dropdown.module.css";
 
+
 type Props = {
     label: string;
     suggestions: string[];
@@ -14,8 +15,8 @@ export function Dropdown(props: Props) {
     return (
         <div className={css.root}>
             <div onClick={() => setOpen(!open)} className={css.top}>
-                <p>{props.selectedItem ? props.selectedItem : "Не выбрано"}</p>{" "}
-                <div className={css.triangle} style={{ transform: `rotate(${open ? 180 : 0}deg)` }}></div>
+                <p>{props.selectedItem ? props.selectedItem : "Любая"}</p>{" "}
+                <div className={css.triangle} style={{ transform: `rotate(${open ? 0 : 180}deg)` }}></div>
             </div>
             {open && (
                 <div className={css.popover}>
