@@ -9,7 +9,7 @@ import locker from "../../assets/img/locker.png";
 
 export function AuthPage() {
     return (
-        <>
+        <div className={css.container}>
             <Header />
             <div className={css.content}>
                 <div className={css.left}>
@@ -51,6 +51,6 @@ export function AuthPage() {
                 </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

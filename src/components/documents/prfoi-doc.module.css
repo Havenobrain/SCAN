@@ -1,0 +1,137 @@
+.root {
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px 0px 20px 0px #00000033;
+    flex-basis: 33.33%;
+}
+
+.data{
+    width: 88px;
+    height: 19px;
+    top: 949px;
+    left: 90px;
+    gap: 0px;
+    opacity: 0px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #949494;
+}
+
+
+.source{
+    width: 246px;
+    height: 19px;
+    top: 949px;
+    left: 192px;
+    gap: 0px;
+    opacity: 0px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #949494;
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+
+.title {
+    font-family: Inter;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 36.31px;
+}
+
+.subtitle {
+    font-family: Inter;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 31.47px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    width: 546px;
+    height: 62px;
+    top: 992px;
+    left: 90px;
+    gap: 0px;
+    opacity: 0px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.content {
+    padding: 30px;
+    padding-bottom: 24px;
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    left: 30px;
+    top: 150px;
+    background-color: #FFB64F;
+    padding: 4px 12px;
+    color: #000000;
+    border-radius: 10px;
+
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.text {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    width: 581px;
+    height: 228px;
+    top: 1282px;
+    left: 90px;
+    gap: 0px;
+    opacity: 0.5px;
+    color: #949494;
+}
+
+.button {
+    width: 223px;
+    height: 46.54px;
+    top: 1542px;
+    left: 90px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    background-color: #7CE3E1;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #eeeeee;
+}
+
+.words{
+    width: 110px;
+    height: 19px;
+    top: 1570px;
+    left: 575px;
+    gap: 0px;
+    opacity: 0px;font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    letter-spacing: 0.02em;
+    color: #949494;
+}

@@ -19,8 +19,8 @@ export function SearchPage() {
 
     return (
         <div>
-            <Header />
             <div className={css.container}>
+            <Header />
                 <div className={css.root}>
                     <h1 className={css.title}>Найдите необходимые данные в пару кликов</h1>
                     <h1 className={css.label}> Задайте параметры поиска. Чем больше заполните, тем точнее поиск</h1>
