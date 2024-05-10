@@ -1,11 +1,12 @@
 import css from "./header.module.css"
+import logo from "../../assets/img/logo.png"
 import avatar from "../../assets/img/avatar.jpg"
 import { Link } from "react-router-dom"
 
 export function Header() {
     return (
         <div className={css.root}>
-            <div className={css.logo}></div>
+            <img className={css.logo} src={logo} alt="" />
             <div className={css.links}>
                 <Link className={css.link} to={"/"}>
                     Главная

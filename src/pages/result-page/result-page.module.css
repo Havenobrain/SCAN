@@ -3,7 +3,6 @@
     margin: 0 auto;
 }
 
-
 .content {
     display: flex;
     gap: 50px;
@@ -22,11 +21,9 @@
     line-height: 48px;
     letter-spacing: 0.04em;
     text-align: left;
-
-
 }
 
-.label{
+.label {
     width: 447px;
     height: 48px;
     top: 294px;
@@ -40,4 +37,25 @@
     letter-spacing: 0.04em;
 }
 
+.table {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #029491;
+}
 
+.column {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    border: 2px solid #029491;
+}
+
+.legend {
+    background: #029491;
+    color: white;
+    composes: column;
+}

@@ -3,9 +3,13 @@
     margin: 0 auto;
 }
 
+.bg {
+    background: url("../../assets/img/rocket.svg") 100% 100% / auto no-repeat;
+}
+
 .title {
     font-family: Ferry;
-    font-size: 60px;
+    font-size: 40px;
     margin-bottom: 20px;
     background: url("../../assets/img/Document.svg") 100% 0 no-repeat;
 }
@@ -36,6 +40,8 @@
 .label {
     margin-bottom: 15px;
     font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .input {

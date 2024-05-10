@@ -19,12 +19,15 @@ export function SearchPage() {
 
     return (
         <div>
-            <div className={css.container}>
-            <Header />
+            <div className={[css.container, css.bg].join(" ")}>
+                <Header />
                 <div className={css.root}>
-                    <h1 className={css.title}>Найдите необходимые данные в пару кликов</h1>
-                    <h1 className={css.label}> Задайте параметры поиска. Чем больше заполните, тем точнее поиск</h1>
-                    <img src={rocket} alt="" />
+                    <h1 className={css.title}>
+                        Найдите необходимые <br /> данные в пару кликов
+                    </h1>
+                    <h1 className={css.label}>
+                        Задайте параметры поиска. <br /> Чем больше заполните, тем точнее поиск
+                    </h1>
                     <div>
                         <form className={css.form}>
                             <div>

@@ -1,5 +1,4 @@
 import css from "./profi-doc.module.css"
-import photo1 from "../../assets/img/photo1.svg"
 
 type ProfiDocProps = {
     date: Date
@@ -8,7 +7,14 @@ type ProfiDocProps = {
     badge: string
     img: string
     text: string
-    wordsCount: number
+    wordsCount: string
+}
+
+export function formatDate(date: Date) {
+    const year = date.getFullYear()
+    const month = date.getMonth().toString().padStart(2, "0")
+    const day = date.getDate().toString().padStart(2, "0")
+    return `${day}.${month}.${year}`
 }
 
 export function ProfiDoc(props: ProfiDocProps) {
@@ -16,12 +22,12 @@ export function ProfiDoc(props: ProfiDocProps) {
         <div className={css.root}>
             <div className={css.content}>
                 <div style={{ display: "flex", flexDirection: "row" }}>
-                    <div className={css.date}>{props.date.toISOString().split("T")[0].replaceAll("-", ".")}</div>
+                    <div className={css.date}>{formatDate(props.date)}</div>
                     <div className={css.source}>{props.source}</div>
                 </div>
                 <div className={css.subtitle}>{props.subtitle}</div>
                 <div className={css.badge}>{props.badge}</div>
-                <img src={photo1} alt="" />
+                <img src={props.img} alt="" />
                 <p style={{ marginBottom: 20 }} className={css.text}>
                     {props.text}
                 </p>
