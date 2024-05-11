@@ -1,7 +1,7 @@
 .root {
     border-radius: 10px 10px 0px 0px;
     box-shadow: 0px 0px 20px 0px #00000033;
-    flex-basis: 33.33%;
+    flex-basis: 50%;
 }
 
 .date {
@@ -51,15 +51,8 @@
     font-weight: 500;
     line-height: 31.47px;
     letter-spacing: 0.02em;
-    text-align: left;
-    width: 546px;
-    height: 62px;
-    top: 992px;
-    left: 90px;
-    gap: 0px;
-    opacity: 0px;
     margin-top: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 14px;
 }
 
 .content {
@@ -69,10 +62,8 @@
 }
 
 .badge {
-    position: absolute;
-    left: 30px;
-    top: 150px;
     background-color: #ffb64f;
+    display: inline-block;
     padding: 4px 12px;
     color: #000000;
     border-radius: 10px;
@@ -81,6 +72,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
+    margin-bottom: 14px;
 }
 
 .text {

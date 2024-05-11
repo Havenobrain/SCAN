@@ -1,11 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const useSlider = (visibleCount: number, length: number) => {
     const initIndexes = Array.from({ length: visibleCount }).map((x, i) => i)
     const [visibleIndexes, setVisibleIndexes] = useState(initIndexes)
 
+    useEffect(() => {
+        setVisibleIndexes(initIndexes)
+    }, [visibleCount])
+
     function goRight() {
-        
         const copy = visibleIndexes.map((x) => x)
 
         copy.shift()
@@ -18,7 +21,6 @@ export const useSlider = (visibleCount: number, length: number) => {
     const first = visibleIndexes[0]
 
     function goLeft() {
-        
         const copy = visibleIndexes.map((x) => x)
 
         copy.pop()

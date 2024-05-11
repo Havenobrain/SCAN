@@ -6,6 +6,7 @@ import { Documents } from "../../components/documents/documents"
 import { formatDate } from "../../components/documents/profi-doc"
 import { useSlider } from "../../components/why-exactly-we/use-slider"
 import chevron2 from "../../assets/img/chevron-right.png"
+import { useBodyWidth } from "../../components/why-exactly-we/why-exactly-we"
 
 type Variant = {
     date: Date
@@ -38,7 +39,14 @@ const variants: Variant[] = [
 ]
 
 export function ResultPage() {
-    const { goLeft, goRight, visibleIndexes } = useSlider(8, 20)
+    const width = useBodyWidth()
+    const getIndexes = () => {
+        if (width < 400) return 1
+        if (width < 600) return 2
+        if (width < 900) return 4
+        return 6
+    }
+    const { goLeft, goRight, visibleIndexes } = useSlider(getIndexes(), 20)
 
     return (
         <div className={css.container}>
@@ -48,43 +56,43 @@ export function ResultPage() {
                 <span className={css.label}>Поиск может занять некоторое время, просим сохранять терпение.</span>
                 <img src={woman} alt="" />
                 <h1 className={css.title}>Общая сводка</h1>
-                    <div className={css.arrow} style={{ display: "flex", gap: 4, alignItems: "center", marginBottom: 70 }}>
-                        <button
-                            style={{transform: `rotate(${180}deg)` }}
-                            disabled={!goLeft}
-                            onClick={() => {
-                                if (goLeft) goLeft()
-                            }}
-                        >
-                            <img src={chevron2} alt="" />
-                        </button>
-                        <div className={css.table}>
-                            <div className={css.legend}>
-                                <p>Период</p>
-                                <p>Всего</p>
-                                <p>Риски</p>
-                            </div>
-                            {variants.map((variant, i) => {
-                                if (visibleIndexes.includes(i)) {
-                                    return (
-                                        <div className={css.column}>
-                                            <p>{formatDate(variant.date)}</p>
-                                            <p>{variant.total}</p>
-                                            <p>{variant.risks}</p>
-                                        </div>
-                                    )
-                                }
-                            })}
+                <div className={css.arrow} style={{ display: "flex", gap: 4, alignItems: "center", marginBottom: 70 }}>
+                    <button
+                        style={{ transform: `rotate(${180}deg)` }}
+                        disabled={!goLeft}
+                        onClick={() => {
+                            if (goLeft) goLeft()
+                        }}
+                    >
+                        <img src={chevron2} alt="" />
+                    </button>
+                    <div className={css.table}>
+                        <div className={css.legend}>
+                            <p>Период</p>
+                            <p>Всего</p>
+                            <p>Риски</p>
                         </div>
-                        <button
-                            disabled={!goRight}
-                            onClick={() => {
-                                if (goRight) goRight()
-                            }}
-                        >
-                            <img src={chevron2} alt="" />
-                        </button>
+                        {variants.map((variant, i) => {
+                            if (visibleIndexes.includes(i)) {
+                                return (
+                                    <div className={css.column}>
+                                        <p>{formatDate(variant.date)}</p>
+                                        <p>{variant.total}</p>
+                                        <p>{variant.risks}</p>
+                                    </div>
+                                )
+                            }
+                        })}
                     </div>
+                    <button
+                        disabled={!goRight}
+                        onClick={() => {
+                            if (goRight) goRight()
+                        }}
+                    >
+                        <img src={chevron2} alt="" />
+                    </button>
+                </div>
                 <h1 className={css.title}>Список документов</h1>
             </div>
             <Documents />

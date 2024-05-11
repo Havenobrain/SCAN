@@ -43,3 +43,29 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.burger {
+    display: none;
+}
+
+@media (width < 800px) {
+    .links,
+    .profile {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+.menu {
+    padding: 30px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #029491;
+    z-index: 1;
+}

@@ -1,17 +1,17 @@
-import { Footer } from "../../components/footer/footer";
-import { Header } from "../../components/header/header";
-import characters from "../../assets/img/Characters.png";
-import facebook from "../../assets/img/facebook.png";
-import google from "../../assets/img/google.png";
-import yandex from "../../assets/img/yandex.png";
-import css from "./auth-page.module.css";
-import locker from "../../assets/img/locker.png";
+import { Footer } from "../../components/footer/footer"
+import { Header } from "../../components/header/header"
+import characters from "../../assets/img/Characters.png"
+import facebook from "../../assets/img/facebook.png"
+import google from "../../assets/img/google.png"
+import yandex from "../../assets/img/yandex.png"
+import css from "./auth-page.module.css"
+import locker from "../../assets/img/locker.png"
 
 export function AuthPage() {
     return (
-        <div className={css.container}>
+        <div className={css.container} style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
             <Header />
-            <div className={css.content}>
+            <div className={css.content} style={{ flexGrow: 1, display: "flex", alignItems: "center", margin: "20px 0" }}>
                 <div className={css.left}>
                     <h1 className={css.title}>Для оформления подписки на тариф, необходимо авторизоваться.</h1>
                     <img src={characters} alt="" />
@@ -52,5 +52,5 @@ export function AuthPage() {
             </div>
             <Footer />
         </div>
-    );
+    )
 }

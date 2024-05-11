@@ -5,7 +5,7 @@
 
 .title {
     font-family: Ferry;
-    font-size: 60px;
+    font-size: clamp(1.75rem, 1.046rem + 3vw, 3.75rem);
     margin-bottom: 20px;
 }
 
@@ -14,8 +14,12 @@
 }
 
 .root {
-    background: url("../../assets/img/main.png") 100% 0 no-repeat;
+    background: url("../../assets/img/main.png") 100% 100% / clamp(7.5rem, -3.063rem + 45.07vw, 37.5rem) no-repeat;
     margin-bottom: 100px;
+
+    @media (width < 800px) {
+        background: url("../../assets/img/main.png") 100% 100% / clamp(7.5rem, -3.063rem + 45.07vw, 37.5rem) no-repeat;
+    }
 }
 
 .left {
@@ -30,7 +34,7 @@
 }
 
 .button {
-    background-color: #5970FF;
+    background-color: #5970ff;
     display: block;
     width: 60%;
     margin-top: 55px;
@@ -44,7 +48,7 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 24.2px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .button:hover {

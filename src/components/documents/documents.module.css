@@ -1,7 +1,11 @@
 .cards {
     display: flex;
     gap: 40px;
-    border: none
+    border: none;
+
+    @media (width < 1300px) {
+        flex-direction: column;
+    }
 }
 
 .title {

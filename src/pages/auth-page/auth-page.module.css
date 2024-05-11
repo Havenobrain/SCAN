@@ -5,11 +5,16 @@
 
 .content {
     display: flex;
+    justify-content: center;
     gap: 50px;
 }
 
 .left {
     flex-basis: 60%;
+
+    @media (width < 800px) {
+        display: none;
+    }
 }
 
 .right {
