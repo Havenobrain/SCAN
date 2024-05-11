@@ -1,4 +1,4 @@
-import css from "./business-card.module.css";
+import css from "./business-card.module.css"
 
 export function BusinessCard() {
     return (
@@ -12,16 +12,18 @@ export function BusinessCard() {
                     <span className={css.newPrice}>2 379 ₽</span>
                     <span className={css.oldPrice}>3 700 ₽</span>
                 </p>
-                <p className={css.text} style={{ marginBottom: 10 }}>
-                    В тариф входит:
-                </p>
-                <ul>
-                    <li className={css.li}>Все пункты тарифа Pro</li>
-                    <li className={css.li}>Безлимитное количество запросов</li>
-                    <li className={css.li}>Приоритетная поддержка </li>
-                </ul>
+                <div style={{ flex: 1 }}>
+                    <p className={css.text} style={{ marginBottom: 10 }}>
+                        В тариф входит:
+                    </p>
+                    <ul>
+                        <li className={css.li}>Все пункты тарифа Pro</li>
+                        <li className={css.li}>Безлимитное количество запросов</li>
+                        <li className={css.li}>Приоритетная поддержка </li>
+                    </ul>
+                </div>
                 <button className={css.button}>Подробнее</button>
             </div>
         </div>
-    );
+    )
 }

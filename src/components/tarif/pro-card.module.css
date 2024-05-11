@@ -2,12 +2,14 @@
     border-radius: 10px 10px 0px 0px;
     box-shadow: 0px 0px 20px 0px #00000033;
     flex-basis: 33.33%;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
     padding: 30px 35px;
     border-radius: 10px 10px 0px 0px;
-    background: #7CE3E1 url("../../assets/img/aim.svg") calc(100% - 5px) no-repeat;
+    background: #7ce3e1 url("../../assets/img/aim.svg") calc(100% - 5px) no-repeat;
 }
 
 .title {
@@ -28,8 +30,10 @@
     padding: 30px;
     padding-bottom: 24px;
     position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
-
 
 .newPrice {
     font-family: Inter;
@@ -68,7 +72,7 @@
 }
 
 .button {
-    background-color: #5970FF;
+    background-color: #5970ff;
     display: block;
     width: 100%;
     margin-top: 55px;
@@ -82,7 +86,7 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 24.2px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .button:hover {

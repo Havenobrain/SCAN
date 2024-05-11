@@ -1,4 +1,4 @@
-import css from "./beginner-card.module.css";
+import css from "./beginner-card.module.css"
 
 export function BeginnerCard() {
     return (
@@ -14,16 +14,18 @@ export function BeginnerCard() {
                     <span className={css.oldPrice}>1 200 ₽</span>
                 </p>
                 <p className={css.text}>или 150 ₽/мес. при рассрочке на 24 мес.</p>
-                <p className={css.text} style={{ marginBottom: 10 }}>
-                    В тариф входит:
-                </p>
-                <ul>
-                    <li className={css.li}>Безлимитная история запросов</li>
-                    <li className={css.li}>Безопасная сделка</li>
-                    <li className={css.li}>Поддержка 24/7</li>
-                </ul>
+                <div style={{ flex: 1 }}>
+                    <p className={css.text} style={{ marginBottom: 10 }}>
+                        В тариф входит:
+                    </p>
+                    <ul>
+                        <li className={css.li}>Безлимитная история запросов</li>
+                        <li className={css.li}>Безопасная сделка</li>
+                        <li className={css.li}>Поддержка 24/7</li>
+                    </ul>
+                </div>
                 <button className={css.button}>Перейти в личный кабинет</button>
             </div>
         </div>
-    );
+    )
 }
