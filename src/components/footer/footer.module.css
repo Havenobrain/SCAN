@@ -13,3 +13,9 @@
     text-align: right;
     color: #fff;
 }
+
+.logo2 {
+    background-color: slateblue;
+    height: 20px;
+    width: 50%;
+}

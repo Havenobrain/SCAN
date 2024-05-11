@@ -1,10 +1,8 @@
 import { ProfiDoc } from "./profi-doc"
 import photo1 from "../../assets/img/photo1.svg"
 import photo2 from "../../assets/img/photo2.svg"
-
 import css from "./documents.module.css"
 
-// 12.10.2021
 
 export function Documents() {
     return (
@@ -31,7 +29,7 @@ SkillFactory — школа для всех, кто хочет изменить 
 В небольших компаниях и стартапах дата-сайентист делает все: собирает и очищает данные, создает математическую модель для их анализа, тестирует ее и презентует готовое решение бизнесу
                     `}
                     source={"VC.RU"}
-                    subtitle={""}
+                    subtitle={"Работа в Data Science в 2022 году: тренды, навыки и обзор специализаций"}
                     badge={"Технические новости"}
                     img={photo2}
                     wordsCount={"3 233"}

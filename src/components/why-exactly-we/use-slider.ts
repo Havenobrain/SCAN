@@ -5,7 +5,7 @@ export const useSlider = (visibleCount: number, length: number) => {
     const [visibleIndexes, setVisibleIndexes] = useState(initIndexes)
 
     function goRight() {
-        //[0, 1, 2] -> [1, 2, 3]
+        
         const copy = visibleIndexes.map((x) => x)
 
         copy.shift()
@@ -18,7 +18,7 @@ export const useSlider = (visibleCount: number, length: number) => {
     const first = visibleIndexes[0]
 
     function goLeft() {
-        //[0, 1, 2] <- [1, 2, 3]
+        
         const copy = visibleIndexes.map((x) => x)
 
         copy.pop()

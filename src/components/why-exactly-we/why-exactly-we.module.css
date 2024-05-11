@@ -15,3 +15,8 @@
 .root {
     margin-bottom: 100px;
 }
+
+.arrow {
+    background-color: transparent;
+    cursor: pointer;
+}

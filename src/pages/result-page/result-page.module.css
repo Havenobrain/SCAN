@@ -20,7 +20,6 @@
     font-weight: 900;
     line-height: 48px;
     letter-spacing: 0.04em;
-    text-align: left;
 }
 
 .label {
@@ -58,4 +57,9 @@
     background: #029491;
     color: white;
     composes: column;
+}
+
+.arrow {
+    background-color: transparent;
+    cursor: pointer;
 }
