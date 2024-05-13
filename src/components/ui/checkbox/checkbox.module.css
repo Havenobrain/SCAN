@@ -2,7 +2,7 @@
     width: 20px;
     height: 20px;
     padding: 3px;
-    border: 1px solid #000;
+    border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .photo {
@@ -16,4 +16,17 @@
 
 .input:checked ~ .checkbox .photo {
     opacity: 1;
+}
+
+.input:checked ~ .checkbox {
+    border: 1px solid #000;
+}
+
+.input:checked ~ .text {
+    color: #000;
+}
+
+.text {
+    transition: all 0.3s ease 0s;
+    color: rgba(0, 0, 0, 0.4);
 }

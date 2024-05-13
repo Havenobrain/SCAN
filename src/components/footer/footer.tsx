@@ -1,6 +1,6 @@
 import css from "./footer.module.css";
 import appCss from "../app.module.css";
-import logo2 from "../../assets/img/logo2.svg";
+import logo2 from "../../assets/img/logo3.png";
 
 export function Footer() {
     return (

@@ -1,21 +1,26 @@
-import { ChangeEventHandler } from "react"
-import css from "./checkbox.module.css"
+import { ChangeEventHandler } from "react";
+import css from "./checkbox.module.css";
 // import tick from "../../../assets/img/checkmark.png"
-import tick from "../../../assets/img/icons8-галочка-96 4.png"
+import tick from "../../../assets/img/icons8-галочка-96 4.png";
 
 type Props = {
-    label: string
-    onChange: ChangeEventHandler<HTMLInputElement>
-}
+    label: string;
+    onChange: ChangeEventHandler<HTMLInputElement>;
+};
 
 export function Checkbox(props: Props) {
     return (
         <label style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <input className={css.input} style={{ flexBasis: "min-content" }} type="checkbox" onChange={(ev) => props.onChange(ev)} />
+            <input
+                className={css.input}
+                style={{ flexBasis: "min-content" }}
+                type="checkbox"
+                onChange={(ev) => props.onChange(ev)}
+            />
             <div className={css.checkbox}>
                 <img className={css.photo} src={tick} alt="" />
             </div>
-            <p>{props.label}</p>
+            <p className={css.text}>{props.label}</p>
         </label>
-    )
+    );
 }

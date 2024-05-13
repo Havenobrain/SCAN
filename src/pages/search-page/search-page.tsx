@@ -1,21 +1,21 @@
-import { Header } from "../../components/header/header"
-import { Footer } from "../../components/footer/footer"
-import css from "./search-page.module.css"
-import rocket from "../../assets/img/rocket.svg"
-import { Checkbox } from "../../components/ui/checkbox/checkbox"
-import { useState } from "react"
-import { Dropdown } from "../../components/ui/dropdown/dropdown"
-import { NumericField } from "../../components/ui/numeric-field/numeric-field"
-import { RangePicker } from "../../components/ui/range-picker/range-picker"
+import { Header } from "../../components/header/header";
+import { Footer } from "../../components/footer/footer";
+import css from "./search-page.module.css";
+import rocket from "../../assets/img/rocket.svg";
+import { Checkbox } from "../../components/ui/checkbox/checkbox";
+import { useState } from "react";
+import { Dropdown } from "../../components/ui/dropdown/dropdown";
+import { NumericField } from "../../components/ui/numeric-field/numeric-field";
+import { RangePicker } from "../../components/ui/range-picker/range-picker";
 
 export function SearchPage() {
-    const [maximumCompleteness, setMaximumCompleteness] = useState(false)
-    const [mentions, setMentions] = useState(false)
-    const [tonality, setTonality] = useState<string | null>(null)
-    const [inn, setInn] = useState<string | null>(null)
+    const [maximumCompleteness, setMaximumCompleteness] = useState(false);
+    const [mentions, setMentions] = useState(false);
+    const [tonality, setTonality] = useState<string | null>(null);
+    const [inn, setInn] = useState<string | null>(null);
 
-    const [from, setFrom] = useState<Date | null>(null)
-    const [to, setTo] = useState<Date | null>(null)
+    const [from, setFrom] = useState<Date | null>(null);
+    const [to, setTo] = useState<Date | null>(null);
 
     return (
         <div>
@@ -60,19 +60,25 @@ export function SearchPage() {
                                     from={from}
                                     to={to}
                                     onChange={(from, to) => {
-                                        setFrom(from)
-                                        setTo(to)
+                                        setFrom(from);
+                                        setTo(to);
                                     }}
                                 />
                             </div>
                             <div style={{ display: "flex", flexDirection: "column" }}>
-                                <div style={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+                                <div className={css.checks}>
                                     <Checkbox
                                         label="Признак максимальной полноты"
                                         onChange={(ev) => setMaximumCompleteness(ev.target.checked)}
                                     />
-                                    <Checkbox label="Упоминания в бизнес-контексте" onChange={(ev) => setMentions(ev.target.checked)} />
-                                    <Checkbox label="Главная роль в публикации" onChange={(ev) => setMentions(ev.target.checked)} />
+                                    <Checkbox
+                                        label="Упоминания в бизнес-контексте"
+                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                    />
+                                    <Checkbox
+                                        label="Главная роль в публикации"
+                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                    />
                                     <Checkbox
                                         label="Публикации только с риск-факторами"
                                         onChange={(ev) => setMentions(ev.target.checked)}
@@ -81,13 +87,19 @@ export function SearchPage() {
                                         label="Включать технические новости рынков"
                                         onChange={(ev) => setMentions(ev.target.checked)}
                                     />
-                                    <Checkbox label="Включать анонсы и календари" onChange={(ev) => setMentions(ev.target.checked)} />
-                                    <Checkbox label="Включать сводки новостей" onChange={(ev) => setMentions(ev.target.checked)} />
+                                    <Checkbox
+                                        label="Включать анонсы и календари"
+                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                    />
+                                    <Checkbox
+                                        label="Включать сводки новостей"
+                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                    />
                                 </div>
                                 <button
                                     className={css.search}
                                     onClick={() => {
-                                        console.log("Начался поиск...")
+                                        console.log("Начался поиск...");
                                     }}
                                 >
                                     Поиск
@@ -99,5 +111,5 @@ export function SearchPage() {
             </div>
             <Footer />
         </div>
-    )
+    );
 }
