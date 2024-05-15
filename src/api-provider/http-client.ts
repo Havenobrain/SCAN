@@ -1,10 +1,19 @@
+import { localStorageService } from "../services/local-storage-service/local-storage-service";
+
 const baseUrl = "https://gateway.scan-interfax.ru";
 
+const Authorization = `Bearer ${localStorageService.auth.get().accessToken}`;
+
 export const httpClient = {
-    get<T>(url: string): Promise<T> {
-        return fetch(baseUrl + url).then((res) => res.json());
+    async get<T>(url: string): Promise<T> {
+        return fetch(baseUrl + url, {
+            method: "GET",
+            headers: {
+                Authorization,
+            },
+        }).then((res) => res.json());
     },
-    post<T>(url: string, data: any): Promise<T> {
+    async post<T>(url: string, data: any): Promise<T> {
         return fetch(baseUrl + url, {
             method: "POST",
             body: JSON.stringify(data),

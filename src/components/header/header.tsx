@@ -6,6 +6,7 @@ import avatar from "../../assets/img/avatar.jpg";
 import close from "../../assets/img/close.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Plate } from "./plate";
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,12 +21,7 @@ export function Header() {
                 <p className={css.link}>Тарифы</p>
                 <p className={css.link}>FAQ</p>
             </div>
-            <div className={css.card}>
-                <p>Использовано компаний </p>
-                <p className={css.bold}> 34</p>
-                <p>Лимит по компаниям</p>
-                <p className={css.green}>100</p>
-            </div>
+            <Plate />
             <div className={css.profile}>
                 <div style={{ textAlign: "right" }}>
                     <p className={css.name}>Алексей А.</p>

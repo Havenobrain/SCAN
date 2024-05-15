@@ -57,7 +57,7 @@ export function AuthPage() {
                                 onClick={async () => {
                                     try {
                                         const data = await apiProvider.login(login, password);
-                                        localStorageService.auth.setData(data);
+                                        localStorageService.auth.set(data);
                                         navigate(nav.main);
                                     } catch (error) {
                                         setError((error as Error).message);

@@ -6,8 +6,11 @@ type AuthData = { accessToken: string; expire: string };
 
 export const localStorageService = {
     auth: {
-        setData: (data: AuthData) => {
+        set: (data: AuthData) => {
             localStorage.setItem(LocalStorageKey.Auth, JSON.stringify(data));
+        },
+        get: (): AuthData => {
+            return JSON.parse(localStorage.getItem(LocalStorageKey.Auth) ?? "");
         },
     },
 };

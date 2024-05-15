@@ -1,0 +1,44 @@
+.card {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    gap: 8px;
+
+    background-color: #d9d9d944;
+    border-radius: 5px 0px 0px 0px;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12.1px;
+    padding: 15px 10px;
+    border-radius: 5px;
+
+    @media (width < 800px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bold {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+.green {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    color: #8ac540;
+}
+
+.spinner {
+    animation: spinner 1.2s linear 0s infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
