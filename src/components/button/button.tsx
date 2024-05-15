@@ -1,20 +1,16 @@
-// const user: { name: string; id: number } = { id: 1, name: "" };
-// props - properties - свойства
+import { MouseEventHandler } from "react";
+import css from "./button.module.css";
 
 type ButtonProps = {
     text: string;
-    number: number;
-    color: string;
+    onClick: MouseEventHandler<HTMLButtonElement>;
+    disabled?: boolean;
 };
 
 export function Button(props: ButtonProps) {
-    function onClick() {
-        console.log(props.text);
-    }
-
     return (
-        <button onClick={onClick} style={{ color: props.color }}>
-            Запросить данные {props.text} {props.number} 
+        <button onClick={props.onClick} className={css.button} disabled={props.disabled} type="button">
+            {props.text}
         </button>
     );
 }

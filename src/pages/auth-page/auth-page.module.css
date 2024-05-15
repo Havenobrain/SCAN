@@ -74,20 +74,6 @@
     border-radius: 3px;
 }
 
-.signIn {
-    width: 100%;
-    padding: 16px 0;
-    border-radius: 5px;
-    background: #5970ff;
-    color: #fff;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-}
-
-.signIn:hover {
-    background: #a5b1fd;
-}
-
 .reset {
     margin-bottom: 30px;
     margin-top: 15px;
