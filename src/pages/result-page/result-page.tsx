@@ -1,18 +1,22 @@
-import { Footer } from "../../components/footer/footer"
-import { Header } from "../../components/header/header"
-import css from "./result-page.module.css"
-import woman from "../../assets/img/woman.svg"
-import { Documents } from "../../components/documents/documents"
-import { formatDate } from "../../components/documents/profi-doc"
-import { useSlider } from "../../components/why-exactly-we/use-slider"
-import chevron2 from "../../assets/img/chevron-right.png"
-import { useBodyWidth } from "../../components/why-exactly-we/why-exactly-we"
+import { Footer } from "../../components/footer/footer";
+import { Header } from "../../components/header/header";
+import css from "./result-page.module.css";
+import woman from "../../assets/img/woman.svg";
+import { Documents } from "../../components/documents/documents";
+import { formatDate } from "../../components/documents/profi-doc";
+import { useSlider } from "../../components/why-exactly-we/use-slider";
+import chevron2 from "../../assets/img/chevron-right.png";
+import { useBodyWidth } from "../../components/why-exactly-we/why-exactly-we";
+import { useFetch } from "../../components/header/useFetch";
+import { apiProvider } from "../../api-provider/api-provider";
+import { useImmer } from "use-immer";
+import { initialData } from "./use-payload";
 
 type Variant = {
-    date: Date
-    total: number
-    risks: number
-}
+    date: Date;
+    total: number;
+    risks: number;
+};
 
 const variants: Variant[] = [
     { date: new Date(), risks: 1, total: 1 },
@@ -36,21 +40,28 @@ const variants: Variant[] = [
     { date: new Date(), risks: 18, total: 18 },
     { date: new Date(), risks: 19, total: 19 },
     { date: new Date(), risks: 20, total: 20 },
-]
+];
 
 export function ResultPage() {
-    const width = useBodyWidth()
+    const width = useBodyWidth();
     const getIndexes = () => {
-        if (width < 400) return 1
-        if (width < 600) return 2
-        if (width < 900) return 4
-        return 6
-    }
-    const { goLeft, goRight, visibleIndexes } = useSlider(getIndexes(), 20)
+        if (width < 400) return 1;
+        if (width < 600) return 2;
+        if (width < 900) return 4;
+        return 6;
+    };
+    const { goLeft, goRight, visibleIndexes } = useSlider(getIndexes(), 20);
 
+    const [payload, updatePayload] = useImmer(initialData);
+
+    const { data, error, isLoading } = useFetch({ queryFn: () => apiProvider.objectsearch.histograms(payload) });
+
+    console.log("data :>> ", data);
+    console.log("error :>> ", error);
     return (
         <div className={css.container}>
             <Header />
+
             <div>
                 <h1 className={css.title}>Ищем. Скоро будут результаты</h1>
                 <span className={css.label}>Поиск может занять некоторое время, просим сохранять терпение.</span>
@@ -61,7 +72,7 @@ export function ResultPage() {
                         style={{ transform: `rotate(${180}deg)` }}
                         disabled={!goLeft}
                         onClick={() => {
-                            if (goLeft) goLeft()
+                            if (goLeft) goLeft();
                         }}
                     >
                         <img src={chevron2} alt="" />
@@ -80,14 +91,14 @@ export function ResultPage() {
                                         <p>{variant.total}</p>
                                         <p>{variant.risks}</p>
                                     </div>
-                                )
+                                );
                             }
                         })}
                     </div>
                     <button
                         disabled={!goRight}
                         onClick={() => {
-                            if (goRight) goRight()
+                            if (goRight) goRight();
                         }}
                     >
                         <img src={chevron2} alt="" />
@@ -98,5 +109,5 @@ export function ResultPage() {
             <Documents />
             <Footer />
         </div>
-    )
+    );
 }

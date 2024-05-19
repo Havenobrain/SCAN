@@ -1,31 +1,10 @@
 import { apiProvider } from "../../api-provider/api-provider";
 import css from "./plate.module.css";
 import spinner from "../../assets/img/spinner.png";
-import { useEffect, useState } from "react";
+import { useFetch } from "./useFetch";
 
-type UseFetchOptions<T> = {
+export type UseFetchOptions<T> = {
     queryFn: () => Promise<T>;
-};
-
-const useFetch = <T,>(options: UseFetchOptions<T>) => {
-    const [data, setData] = useState<T | undefined>(undefined);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-
-    useEffect(() => {
-        setIsLoading(true);
-        (async () => {
-            try {
-                const response = await options.queryFn();
-                setData(response);
-            } catch (error) {
-                setError((error as Error).message);
-            }
-            setIsLoading(false);
-        })();
-    }, []);
-
-    return { data, isLoading, error };
 };
 
 export function Plate() {

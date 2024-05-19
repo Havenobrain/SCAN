@@ -9,8 +9,10 @@ export const localStorageService = {
         set: (data: AuthData) => {
             localStorage.setItem(LocalStorageKey.Auth, JSON.stringify(data));
         },
-        get: (): AuthData => {
-            return JSON.parse(localStorage.getItem(LocalStorageKey.Auth) ?? "");
+        get: (): AuthData | null => {
+            const authData = localStorage.getItem(LocalStorageKey.Auth);
+            if (!authData) return null;
+            return JSON.parse(authData);
         },
     },
 };

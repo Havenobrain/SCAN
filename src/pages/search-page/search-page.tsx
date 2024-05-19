@@ -7,15 +7,14 @@ import { useState } from "react";
 import { Dropdown } from "../../components/ui/dropdown/dropdown";
 import { NumericField } from "../../components/ui/numeric-field/numeric-field";
 import { RangePicker } from "../../components/ui/range-picker/range-picker";
+import { initialData } from "../result-page/use-payload";
+import { useImmer } from "use-immer";
 
 export function SearchPage() {
     const [maximumCompleteness, setMaximumCompleteness] = useState(false);
     const [mentions, setMentions] = useState(false);
-    const [tonality, setTonality] = useState<string | null>(null);
-    const [inn, setInn] = useState<string | null>(null);
 
-    const [from, setFrom] = useState<Date | null>(null);
-    const [to, setTo] = useState<Date | null>(null);
+    const [payload, updatePayload] = useImmer(initialData);
 
     return (
         <div>
@@ -32,8 +31,13 @@ export function SearchPage() {
                         <form className={css.form}>
                             <div>
                                 <NumericField
-                                    value={inn}
-                                    onChange={(ev) => setInn(ev.target.value)}
+                                    value={payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn.toString()}
+                                    onChange={(ev) =>
+                                        updatePayload((draft) => {
+                                            draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn =
+                                                +ev.target.value;
+                                        })
+                                    }
                                     required
                                     label="ИНН компании"
                                     placeholder="placeholder"
@@ -43,25 +47,44 @@ export function SearchPage() {
                                     <p className={css.label}>Тональность</p>
                                     <div className={css.label}>
                                         <Dropdown
-                                            onSelect={(item) => setTonality(item)}
+                                            onSelect={(item) => {
+                                                updatePayload((draft) => {
+                                                    draft.searchContext.targetSearchEntitiesContext.tonality = item;
+                                                });
+                                            }}
                                             label="Тональность"
-                                            suggestions={["Любая", "Положительная", "Отрицательная"]}
-                                            selectedItem={tonality}
+                                            suggestions={[
+                                                { displayText: "Любая", value: "any" },
+                                                { displayText: "Положительная", value: "positive" },
+                                                { displayText: "Отрицательная", value: "negative" },
+                                            ]}
+                                            selectedItem={payload.searchContext.targetSearchEntitiesContext.tonality}
                                         />
                                     </div>
                                 </label>
                                 <label>
                                     <p className={css.label}>Количество документов в выдаче</p>
-                                    <input className={css.input} type="numbers" />
+                                    <input
+                                        className={css.input}
+                                        type="numbers"
+                                        value={payload.limit}
+                                        onChange={(ev) => {
+                                            updatePayload((draft) => {
+                                                draft.limit = Number(ev.target.value);
+                                            });
+                                        }}
+                                    />
                                 </label>
                                 <RangePicker
                                     label="Диапазон поиска"
                                     required
-                                    from={from}
-                                    to={to}
+                                    from={new Date(payload.issueDateInterval.startDate)}
+                                    to={new Date(payload.issueDateInterval.endDate)}
                                     onChange={(from, to) => {
-                                        setFrom(from);
-                                        setTo(to);
+                                        updatePayload((draft) => {
+                                            draft.issueDateInterval.startDate = from?.toISOString() ?? "";
+                                            draft.issueDateInterval.endDate = to?.toISOString() ?? "";
+                                        });
                                     }}
                                 />
                             </div>
@@ -69,15 +92,37 @@ export function SearchPage() {
                                 <div className={css.checks}>
                                     <Checkbox
                                         label="Признак максимальной полноты"
-                                        onChange={(ev) => setMaximumCompleteness(ev.target.checked)}
+                                        value={
+                                            payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].maxFullness
+                                        }
+                                        onChange={(ev) => {
+                                            updatePayload((draft) => {
+                                                draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].maxFullness =
+                                                    ev.target.checked;
+                                            });
+                                        }}
                                     />
                                     <Checkbox
                                         label="Упоминания в бизнес-контексте"
-                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                        value={
+                                            payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]
+                                                .inBusinessNews
+                                        }
+                                        onChange={(ev) => {
+                                            updatePayload((draft) => {
+                                                draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inBusinessNews =
+                                                    ev.target.checked;
+                                            });
+                                        }}
                                     />
                                     <Checkbox
                                         label="Главная роль в публикации"
-                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                        value={payload.searchContext.targetSearchEntitiesContext.onlyMainRole}
+                                        onChange={(ev) => {
+                                            updatePayload((draft) => {
+                                                draft.searchContext.targetSearchEntitiesContext.onlyMainRole = ev.target.checked;
+                                            });
+                                        }}
                                     />
                                     <Checkbox
                                         label="Публикации только с риск-факторами"

@@ -1,15 +1,19 @@
 import { useState } from "react";
 import css from "./dropdown.module.css";
 
-
-type Props = {
-    label: string;
-    suggestions: string[];
-    selectedItem: string | null;
-    onSelect: (item: string) => void;
+type Suggestion<T> = {
+    displayText: string;
+    value: T;
 };
 
-export function Dropdown(props: Props) {
+type Props<T> = {
+    label: string;
+    suggestions: Suggestion<T>[];
+    selectedItem: string | null;
+    onSelect: (item: T) => void;
+};
+
+export function Dropdown<T>(props: Props<T>) {
     const [open, setOpen] = useState(false);
 
     return (
@@ -23,11 +27,11 @@ export function Dropdown(props: Props) {
                     {props.suggestions.map((suggestion) => (
                         <p
                             onClick={() => {
-                                props.onSelect(suggestion);
+                                props.onSelect(suggestion.value);
                                 setOpen(false);
                             }}
                         >
-                            {suggestion}
+                            {suggestion.displayText}
                         </p>
                     ))}
                 </div>

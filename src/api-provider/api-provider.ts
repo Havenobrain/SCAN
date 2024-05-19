@@ -1,3 +1,5 @@
+import { HistogramsPayload } from "./histograms";
+import { HistogramsResponse } from "./histograms-payload";
 import { httpClient } from "./http-client";
 
 export const apiProvider = {
@@ -5,7 +7,15 @@ export const apiProvider = {
         return httpClient.post<{ accessToken: string; expire: string }>("/api/v1/account/login", { login, password });
     },
     account: {
-        info: () =>
-            httpClient.get<{ eventFiltersInfo: { usedCompanyCount: number; companyLimit: number } }>("/api/v1/account/info"),
+        info: async () => {
+            return httpClient.get<{ eventFiltersInfo: { usedCompanyCount: number; companyLimit: number } }>(
+                "/api/v1/account/info"
+            );
+        },
+    },
+    objectsearch: {
+        histograms: async (data: HistogramsPayload) => {
+            return httpClient.post<HistogramsResponse>("/api/v1/objectsearch/histograms", data);
+        },
     },
 };
