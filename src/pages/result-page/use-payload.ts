@@ -12,7 +12,7 @@ export const initialData: HistogramsPayload = {
                     type: "company",
                     sparkId: null,
                     entityId: null,
-                    inn: 7710137066,
+                    inn: NaN,
                     maxFullness: true,
                     inBusinessNews: null,
                 },

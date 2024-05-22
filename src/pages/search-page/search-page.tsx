@@ -9,11 +9,9 @@ import { NumericField } from "../../components/ui/numeric-field/numeric-field";
 import { RangePicker } from "../../components/ui/range-picker/range-picker";
 import { initialData } from "../result-page/use-payload";
 import { useImmer } from "use-immer";
+import { apiProvider } from "../../api-provider/api-provider";
 
 export function SearchPage() {
-    const [maximumCompleteness, setMaximumCompleteness] = useState(false);
-    const [mentions, setMentions] = useState(false);
-
     const [payload, updatePayload] = useImmer(initialData);
 
     return (
@@ -46,20 +44,31 @@ export function SearchPage() {
                                 <label>
                                     <p className={css.label}>Тональность</p>
                                     <div className={css.label}>
-                                        <Dropdown
-                                            onSelect={(item) => {
-                                                updatePayload((draft) => {
-                                                    draft.searchContext.targetSearchEntitiesContext.tonality = item;
-                                                });
-                                            }}
-                                            label="Тональность"
-                                            suggestions={[
+                                        {(() => {
+                                            const suggestions = [
                                                 { displayText: "Любая", value: "any" },
                                                 { displayText: "Положительная", value: "positive" },
                                                 { displayText: "Отрицательная", value: "negative" },
-                                            ]}
-                                            selectedItem={payload.searchContext.targetSearchEntitiesContext.tonality}
-                                        />
+                                            ];
+                                            return (
+                                                <Dropdown
+                                                    onSelect={(item) => {
+                                                        updatePayload((draft) => {
+                                                            draft.searchContext.targetSearchEntitiesContext.tonality = item;
+                                                        });
+                                                    }}
+                                                    label="Тональность"
+                                                    suggestions={suggestions}
+                                                    selectedItem={
+                                                        suggestions.find(
+                                                            (s) =>
+                                                                s.value ===
+                                                                payload.searchContext.targetSearchEntitiesContext.tonality
+                                                        )?.displayText ?? ""
+                                                    }
+                                                />
+                                            );
+                                        })()}
                                     </div>
                                 </label>
                                 <label>
@@ -125,26 +134,49 @@ export function SearchPage() {
                                         }}
                                     />
                                     <Checkbox
+                                        value={payload.searchContext.targetSearchEntitiesContext.onlyWithRiskFactors}
                                         label="Публикации только с риск-факторами"
-                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                        onChange={(ev) =>
+                                            updatePayload((draft) => {
+                                                draft.searchContext.targetSearchEntitiesContext.onlyWithRiskFactors =
+                                                    ev.target.checked;
+                                            })
+                                        }
                                     />
                                     <Checkbox
+                                        value={!payload.attributeFilters.excludeTechNews}
                                         label="Включать технические новости рынков"
-                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                        onChange={(ev) =>
+                                            updatePayload((draft) => {
+                                                draft.attributeFilters.excludeTechNews = !ev.target.checked;
+                                            })
+                                        }
                                     />
                                     <Checkbox
+                                        value={!payload.attributeFilters.excludeAnnouncements}
                                         label="Включать анонсы и календари"
-                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                        onChange={(ev) =>
+                                            updatePayload((draft) => {
+                                                draft.attributeFilters.excludeAnnouncements = !ev.target.checked;
+                                            })
+                                        }
                                     />
                                     <Checkbox
+                                        value={!payload.attributeFilters.excludeDigests}
                                         label="Включать сводки новостей"
-                                        onChange={(ev) => setMentions(ev.target.checked)}
+                                        onChange={(ev) =>
+                                            updatePayload((draft) => {
+                                                draft.attributeFilters.excludeDigests = !ev.target.checked;
+                                            })
+                                        }
                                     />
                                 </div>
                                 <button
                                     className={css.search}
-                                    onClick={() => {
-                                        console.log("Начался поиск...");
+                                    type="button"
+                                    onClick={async () => {
+                                        const response = await apiProvider.objectsearch.histograms(payload);
+                                        console.log("response :>> ", response);
                                     }}
                                 >
                                     Поиск
