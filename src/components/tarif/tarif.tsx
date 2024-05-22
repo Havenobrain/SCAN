@@ -6,7 +6,9 @@ import css from "./tarif.module.css";
 export function Tarif() {
     return (
         <div>
-            <h1 className={css.title}>НАШИ ТАРИФЫ</h1>
+            <h1 className={css.title} id="tariffs">
+                НАШИ ТАРИФЫ
+            </h1>
             <div className={css.cards}>
                 <BeginnerCard />
                 <ProCard />

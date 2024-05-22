@@ -18,7 +18,9 @@ export function Header() {
                 <Link className={css.link} to={"/"}>
                     Главная
                 </Link>
-                <p className={css.link}>Тарифы</p>
+                <a href="#tariffs" className={css.link}>
+                    Тарифы
+                </a>
                 <p className={css.link}>FAQ</p>
             </div>
             <Plate />
