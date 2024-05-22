@@ -72,6 +72,11 @@
     align-self: flex-end;
 }
 
+.search[disabled] {
+    pointer-events: none;
+    background: #a5b1fd;
+}
+
 .search:hover {
     background: #a5b1fd;
 }

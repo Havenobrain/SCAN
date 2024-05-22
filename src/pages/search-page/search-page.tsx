@@ -14,6 +14,11 @@ import { apiProvider } from "../../api-provider/api-provider";
 export function SearchPage() {
     const [payload, updatePayload] = useImmer(initialData);
 
+    const isDisabled = () => {
+        if (!payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn) return true;
+        return false;
+    };
+
     return (
         <div>
             <div className={[css.container, css.bg].join(" ")}>
@@ -173,9 +178,10 @@ export function SearchPage() {
                                 </div>
                                 <button
                                     className={css.search}
+                                    disabled={isDisabled()}
                                     type="button"
                                     onClick={async () => {
-                                        const response = await apiProvider.objectsearch.histograms(payload);
+                                        const response = await apiProvider.objectsearch.root(payload);
                                         console.log("response :>> ", response);
                                     }}
                                 >

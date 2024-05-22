@@ -1,24 +1,24 @@
-import css from "./range-picker.module.css"
+import css from "./range-picker.module.css";
 
 type Props = {
-    from: Date | null
-    to: Date | null
-    onChange: (from: Date | null, to: Date | null) => void
-    label: string
-    required?: boolean
-}
+    from: Date | null;
+    to: Date | null;
+    onChange: (from: Date | null, to: Date | null) => void;
+    label: string;
+    required?: boolean;
+};
 
 function dateToString(date: Date | null) {
-    if (!date) return ""
+    if (!date) return "";
 
-    const year = date.getFullYear()
-    const month = date.getMonth().toString().padStart(2, "0")
-    const day = date.getDate().toString().padStart(2, "0")
-    return `${year}-${month}-${day}`
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
 }
 
 function stringToDate(string: string): Date {
-    return new Date(string)
+    return new Date(string);
 }
 
 export function RangePicker(props: Props) {
@@ -34,9 +34,9 @@ export function RangePicker(props: Props) {
                     value={dateToString(props.from)}
                     onChange={(ev) => {
                         if (ev.target.value) {
-                            props.onChange(stringToDate(ev.target.value), props.to)
+                            props.onChange(stringToDate(ev.target.value), props.to);
                         } else {
-                            props.onChange(null, props.to)
+                            props.onChange(null, props.to);
                         }
                     }}
                 />
@@ -45,13 +45,13 @@ export function RangePicker(props: Props) {
                     value={dateToString(props.to)}
                     onChange={(ev) => {
                         if (ev.target.value) {
-                            props.onChange(props.from, stringToDate(ev.target.value))
+                            props.onChange(props.from, stringToDate(ev.target.value));
                         } else {
-                            props.onChange(props.from, null)
+                            props.onChange(props.from, null);
                         }
                     }}
                 />
             </div>
         </div>
-    )
+    );
 }

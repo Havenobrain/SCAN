@@ -1,23 +1,26 @@
-import css from "./profi-doc.module.css"
+import css from "./profi-doc.module.css";
 
 type ProfiDocProps = {
-    date: Date
-    source: string
-    subtitle: string
-    badge: string
-    img: string
-    text: string
-    wordsCount: string
-}
+    date: Date;
+    source: string;
+    title: string;
+    badge: string;
+    img: string;
+    text: string;
+    wordsCount: string;
+};
 
 export function formatDate(date: Date) {
-    const year = date.getFullYear()
-    const month = date.getMonth().toString().padStart(2, "0")
-    const day = date.getDate().toString().padStart(2, "0")
-    return `${day}.${month}.${year}`
+    const year = date.getFullYear();
+    const month = date.getMonth().toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${day}.${month}.${year}`;
 }
 
+const parser = new DOMParser();
+
 export function ProfiDoc(props: ProfiDocProps) {
+    const html = parser.parseFromString(props.text, "text/xml");
     return (
         <div className={css.root}>
             <div className={css.content}>
@@ -25,19 +28,17 @@ export function ProfiDoc(props: ProfiDocProps) {
                     <div className={css.date}>{formatDate(props.date)}</div>
                     <div className={css.source}>{props.source}</div>
                 </div>
-                <div className={css.subtitle}>{props.subtitle}</div>
+                <div className={css.subtitle}>{props.title}</div>
                 <div className={css.badge}>{props.badge}</div>
                 <img src={props.img} alt="" />
-                <p style={{ marginBottom: 20 }} className={css.text}>
-                    {props.text}
-                </p>
+                {/* <p style={{ marginBottom: 20 }} className={css.text} dangerouslySetInnerHTML={{ __html: html.body.outerHTML }} /> */}
                 <div className={css.line}>
                     <button className={css.button}>Читать в источнике</button>
                     <div className={css.words}>{props.wordsCount} слова</div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 // export function ProfiDoc() {

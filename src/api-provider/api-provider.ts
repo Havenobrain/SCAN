@@ -14,8 +14,31 @@ export const apiProvider = {
         },
     },
     objectsearch: {
+        root: async (data: HistogramsPayload) => {
+            return httpClient.post<HistogramsResponse>("/api/v1/objectsearch", data);
+        },
         histograms: async (data: HistogramsPayload) => {
             return httpClient.post<HistogramsResponse>("/api/v1/objectsearch/histograms", data);
         },
     },
+    documents: {
+        root: async (ids: string[]) => {
+            return httpClient.post("/api/v1/documents", { ids });
+        },
+    },
 };
+
+// /api/v1/documents/start/home
+// /api/v1/documents/start/test
+
+// const _apiProvider = {
+//     documents: {
+//         start: {
+//             home: () => {},
+//             test: () => {},
+//         },
+//     },
+// };
+
+// _apiProvider.documents.start.home();
+// _apiProvider.documents.start.test();

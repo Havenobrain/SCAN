@@ -3,7 +3,6 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { MainPage } from "../pages/main-page";
 import { SearchPage } from "../pages/search-page/search-page";
 import { ResultPage } from "../pages/result-page/result-page";
-import { useEffect } from "react";
 import { localStorageService } from "../services/local-storage-service/local-storage-service";
 
 export function App() {
