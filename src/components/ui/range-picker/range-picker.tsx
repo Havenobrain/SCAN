@@ -4,7 +4,6 @@ type Props = {
     from: Date | null;
     to: Date | null;
     onChange: (from: Date | null, to: Date | null) => void;
-    label: string;
     required?: boolean;
 };
 
@@ -23,34 +22,43 @@ function stringToDate(string: string): Date {
 
 export function RangePicker(props: Props) {
     return (
-        <div>
-            <div>
-                {props.label}
-                {props.required ? "*" : ""}
+        <div className={css.container}>
+            <div className={css.labelWrapper}>
+                <label className={css.label}>
+                    Диапазон поиска {props.required && <span className={css.required}>*</span>}
+                </label>
             </div>
             <div className={css.line}>
-                <input
-                    type="date"
-                    value={dateToString(props.from)}
-                    onChange={(ev) => {
-                        if (ev.target.value) {
-                            props.onChange(stringToDate(ev.target.value), props.to);
-                        } else {
-                            props.onChange(null, props.to);
-                        }
-                    }}
-                />
-                <input
-                    type="date"
-                    value={dateToString(props.to)}
-                    onChange={(ev) => {
-                        if (ev.target.value) {
-                            props.onChange(props.from, stringToDate(ev.target.value));
-                        } else {
-                            props.onChange(props.from, null);
-                        }
-                    }}
-                />
+                <div className={css.dateInputWrapper}>
+                    <input
+                        type="date"
+                        value={dateToString(props.from)}
+                        className={css.dateInput}
+                        onChange={(ev) => {
+                            if (ev.target.value) {
+                                props.onChange(stringToDate(ev.target.value), props.to);
+                            } else {
+                                props.onChange(null, props.to);
+                            }
+                        }}
+                    />
+                    <div className={css.arrow}></div>
+                </div>
+                <div className={css.dateInputWrapper}>
+                    <input
+                        type="date"
+                        value={dateToString(props.to)}
+                        className={css.dateInput}
+                        onChange={(ev) => {
+                            if (ev.target.value) {
+                                props.onChange(props.from, stringToDate(ev.target.value));
+                            } else {
+                                props.onChange(props.from, null);
+                            }
+                        }}
+                    />
+                    <div className={css.arrow}></div>
+                </div>
             </div>
         </div>
     );

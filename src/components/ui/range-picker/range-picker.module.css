@@ -1,4 +1,74 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.labelWrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.label {
+    font-size: 16px; 
+    font-family: Inter;
+    font-weight: 400; 
+}
+
+.required {
+    color: black; 
+    margin-left: 2px;
+}
+
 .line {
     display: flex;
     gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.dateInputWrapper {
+    position: relative;
+    flex: 1;
+}
+
+.dateInput {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; 
+    font-family: Inter;
+    appearance: none; 
+}
+
+.dateInput::placeholder {
+    color: #aaa;
+    text-align: center;
+}
+
+.arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #000;
+    pointer-events: none;
+}
+
+.dateInputWrapper::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #000;
+    pointer-events: none;
 }

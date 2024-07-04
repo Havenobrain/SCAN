@@ -1,13 +1,14 @@
 export interface HistogramsResponse {
-    data: Daum[];
+    data: Datum[];
 }
 
-export interface Daum {
-    data: Daum2[];
+export interface Datum {
+    data: Datum2[];
     histogramType: string;
 }
 
-export interface Daum2 {
+export interface Datum2 {
     date: string;
     value: number;
+    id: string; 
 }

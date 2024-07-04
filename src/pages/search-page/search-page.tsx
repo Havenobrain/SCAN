@@ -1,9 +1,7 @@
-import { Header } from "../../components/header/header";
-import { Footer } from "../../components/footer/footer";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import css from "./search-page.module.css";
-import rocket from "../../assets/img/rocket.svg";
 import { Checkbox } from "../../components/ui/checkbox/checkbox";
-import { useState } from "react";
 import { Dropdown } from "../../components/ui/dropdown/dropdown";
 import { NumericField } from "../../components/ui/numeric-field/numeric-field";
 import { RangePicker } from "../../components/ui/range-picker/range-picker";
@@ -13,16 +11,38 @@ import { apiProvider } from "../../api-provider/api-provider";
 
 export function SearchPage() {
     const [payload, updatePayload] = useImmer(initialData);
+    const navigate = useNavigate();
 
     const isDisabled = () => {
-        if (!payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn) return true;
-        return false;
+        return !payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn;
     };
+
+    const handleSearch = async () => {
+        if (isNaN(payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn)) {
+            console.error("ИНН компании невалиден");
+            return;
+        }
+    
+        try {
+            console.log("Sending payload:", JSON.stringify(payload, null, 2));  // Логирование отправляемых данных
+            const response = await apiProvider.objectsearch.root(payload);
+            console.log("response :>> ", response);
+            navigate('/result', { state: { searchResults: response } });
+        } catch (error) {
+            console.error("Error during search:", error);
+            navigate('/result', { state: { searchResults: null } });
+        }
+    };
+
+    const suggestions = [
+        { displayText: "Любая", value: "any" },
+        { displayText: "Положительная", value: "positive" },
+        { displayText: "Отрицательная", value: "negative" },
+    ];
 
     return (
         <div>
             <div className={[css.container, css.bg].join(" ")}>
-                <Header />
                 <div className={css.root}>
                     <h1 className={css.title}>
                         Найдите необходимые <br /> данные в пару кликов
@@ -35,7 +55,7 @@ export function SearchPage() {
                             <div>
                                 <NumericField
                                     value={payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn.toString()}
-                                    onChange={(ev) =>
+                                    onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                                         updatePayload((draft) => {
                                             draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn =
                                                 +ev.target.value;
@@ -45,44 +65,34 @@ export function SearchPage() {
                                     label="ИНН компании"
                                     placeholder="placeholder"
                                 />
-
                                 <label>
                                     <p className={css.label}>Тональность</p>
                                     <div className={css.label}>
-                                        {(() => {
-                                            const suggestions = [
-                                                { displayText: "Любая", value: "any" },
-                                                { displayText: "Положительная", value: "positive" },
-                                                { displayText: "Отрицательная", value: "negative" },
-                                            ];
-                                            return (
-                                                <Dropdown
-                                                    onSelect={(item) => {
-                                                        updatePayload((draft) => {
-                                                            draft.searchContext.targetSearchEntitiesContext.tonality = item;
-                                                        });
-                                                    }}
-                                                    label="Тональность"
-                                                    suggestions={suggestions}
-                                                    selectedItem={
-                                                        suggestions.find(
-                                                            (s) =>
-                                                                s.value ===
-                                                                payload.searchContext.targetSearchEntitiesContext.tonality
-                                                        )?.displayText ?? ""
-                                                    }
-                                                />
-                                            );
-                                        })()}
+                                        <Dropdown
+                                            onSelect={(item) => {
+                                                updatePayload((draft) => {
+                                                    draft.searchContext.targetSearchEntitiesContext.tonality = item;
+                                                });
+                                            }}
+                                            label="Тональность"
+                                            suggestions={suggestions}
+                                            selectedItem={
+                                                suggestions.find(
+                                                    (s) =>
+                                                        s.value ===
+                                                        payload.searchContext.targetSearchEntitiesContext.tonality
+                                                )?.displayText ?? "Любая"
+                                            }
+                                        />
                                     </div>
                                 </label>
                                 <label>
                                     <p className={css.label}>Количество документов в выдаче</p>
                                     <input
                                         className={css.input}
-                                        type="numbers"
-                                        value={payload.limit}
-                                        onChange={(ev) => {
+                                        type="number"
+                                        value={payload.limit.toString()}
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
                                                 draft.limit = Number(ev.target.value);
                                             });
@@ -90,7 +100,6 @@ export function SearchPage() {
                                     />
                                 </label>
                                 <RangePicker
-                                    label="Диапазон поиска"
                                     required
                                     from={new Date(payload.issueDateInterval.startDate)}
                                     to={new Date(payload.issueDateInterval.endDate)}
@@ -106,10 +115,10 @@ export function SearchPage() {
                                 <div className={css.checks}>
                                     <Checkbox
                                         label="Признак максимальной полноты"
-                                        value={
+                                        checked={
                                             payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].maxFullness
                                         }
-                                        onChange={(ev) => {
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
                                                 draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].maxFullness =
                                                     ev.target.checked;
@@ -118,11 +127,11 @@ export function SearchPage() {
                                     />
                                     <Checkbox
                                         label="Упоминания в бизнес-контексте"
-                                        value={
+                                        checked={
                                             payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]
                                                 .inBusinessNews
                                         }
-                                        onChange={(ev) => {
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
                                                 draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inBusinessNews =
                                                     ev.target.checked;
@@ -131,17 +140,17 @@ export function SearchPage() {
                                     />
                                     <Checkbox
                                         label="Главная роль в публикации"
-                                        value={payload.searchContext.targetSearchEntitiesContext.onlyMainRole}
-                                        onChange={(ev) => {
+                                        checked={payload.searchContext.targetSearchEntitiesContext.onlyMainRole}
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
                                                 draft.searchContext.targetSearchEntitiesContext.onlyMainRole = ev.target.checked;
                                             });
                                         }}
                                     />
                                     <Checkbox
-                                        value={payload.searchContext.targetSearchEntitiesContext.onlyWithRiskFactors}
+                                        checked={payload.searchContext.targetSearchEntitiesContext.onlyWithRiskFactors}
                                         label="Публикации только с риск-факторами"
-                                        onChange={(ev) =>
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                                             updatePayload((draft) => {
                                                 draft.searchContext.targetSearchEntitiesContext.onlyWithRiskFactors =
                                                     ev.target.checked;
@@ -149,27 +158,27 @@ export function SearchPage() {
                                         }
                                     />
                                     <Checkbox
-                                        value={!payload.attributeFilters.excludeTechNews}
+                                        checked={!payload.attributeFilters.excludeTechNews}
                                         label="Включать технические новости рынков"
-                                        onChange={(ev) =>
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                                             updatePayload((draft) => {
                                                 draft.attributeFilters.excludeTechNews = !ev.target.checked;
                                             })
                                         }
                                     />
                                     <Checkbox
-                                        value={!payload.attributeFilters.excludeAnnouncements}
+                                        checked={!payload.attributeFilters.excludeAnnouncements}
                                         label="Включать анонсы и календари"
-                                        onChange={(ev) =>
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                                             updatePayload((draft) => {
                                                 draft.attributeFilters.excludeAnnouncements = !ev.target.checked;
                                             })
                                         }
                                     />
                                     <Checkbox
-                                        value={!payload.attributeFilters.excludeDigests}
+                                        checked={!payload.attributeFilters.excludeDigests}
                                         label="Включать сводки новостей"
-                                        onChange={(ev) =>
+                                        onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                                             updatePayload((draft) => {
                                                 draft.attributeFilters.excludeDigests = !ev.target.checked;
                                             })
@@ -180,10 +189,7 @@ export function SearchPage() {
                                     className={css.search}
                                     disabled={isDisabled()}
                                     type="button"
-                                    onClick={async () => {
-                                        const response = await apiProvider.objectsearch.root(payload);
-                                        console.log("response :>> ", response);
-                                    }}
+                                    onClick={handleSearch}
                                 >
                                     Поиск
                                 </button>
@@ -192,7 +198,6 @@ export function SearchPage() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

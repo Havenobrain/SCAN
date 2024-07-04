@@ -4,18 +4,25 @@ import { MainPage } from "../pages/main-page";
 import { SearchPage } from "../pages/search-page/search-page";
 import { ResultPage } from "../pages/result-page/result-page";
 import { localStorageService } from "../services/local-storage-service/local-storage-service";
+import { Header } from "./header/header";
+import { Footer } from "./footer/footer";
+import { DocumentFetcher } from "./DocumentFetcher";
 
 export function App() {
     return (
-        <Routes>
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/" element={<MainPage />} />
-
-            <Route element={<PrivateRoute />}>
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/result" element={<ResultPage />} />
-            </Route>
-        </Routes>
+        <div>
+            <Header />
+            <Routes>
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/" element={<MainPage />} />
+                <Route element={<PrivateRoute />}>
+                    <Route path="/search" element={<SearchPage />} />
+                    <Route path="/result" element={<ResultPage />} />
+                    <Route path="/documents" element={<DocumentFetcher />} />
+                </Route>
+            </Routes>
+            <Footer />
+        </div>
     );
 }
 

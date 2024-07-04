@@ -1,42 +1,45 @@
-import { Card } from "./card"
-import css from "./why-exactly-we.module.css"
-import imagePath from "../../assets/img/Group 14.png"
-import { useSlider } from "./use-slider"
-import chevron2 from "../../assets/img/chevron-right.png"
-import { useEffect, useState } from "react"
+import { Card } from "./card";
+import css from "./why-exactly-we.module.css";
+import imagePath from "../../assets/img/Group 14.png";
+import { useSlider } from "./use-slider";
+import chevron2 from "../../assets/img/chevron-right.png";
+import { useEffect, useState } from "react";
 
-const cards = [
-    <Card image="timer" text="Высокая и оперативная скорость обработки заявки" />,
-    <Card image="search" text="Огромная комплексная база данных, обеспечивающая объективный ответ на запрос" />,
-    <Card image="security" text="Защита конфиденциальных сведений, не подлежащих разглашению по федеральному законодательству" />,
-    <Card image="security" text="1" />,
-    <Card image="security" text="2" />,
-    <Card image="security" text="3" />,
-    <Card image="security" text="4" />,
-]
+const cardData = [
+    { id: 1, image: "timer", text: "Высокая и оперативная скорость обработки заявки" },
+    { id: 2, image: "search", text: "Огромная комплексная база данных, обеспечивающая объективный ответ на запрос" },
+    { id: 3, image: "security", text: "Защита конфиденциальных сведений, не подлежащих разглашению по федеральному законодательству" },
+    { id: 4, image: "security", text: "1" },
+    { id: 5, image: "security", text: "2" },
+    { id: 6, image: "security", text: "3" },
+    { id: 7, image: "security", text: "4" },
+];
 
 export const useBodyWidth = () => {
-    const [width, setWidth] = useState(1920)
+    const [width, setWidth] = useState(1920);
 
     useEffect(() => {
-        window.addEventListener("resize", (ev) => {
-            setWidth(document.body.getBoundingClientRect().width)
-        })
-    }, [])
+        const handleResize = () => {
+            setWidth(document.body.getBoundingClientRect().width);
+        };
+        window.addEventListener("resize", handleResize);
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
-    return width
-}
+    return width;
+};
 
 export function WhyExactlyWe() {
-    const width = useBodyWidth()
+    const width = useBodyWidth();
 
     const getVisibleIndexes = () => {
-        if (width < 800) return 1
-        if (width < 1000) return 2
-        return 3
-    }
+        if (width < 800) return 1;
+        if (width < 1000) return 2;
+        return 3;
+    };
 
-    const { goLeft, goRight, visibleIndexes } = useSlider(getVisibleIndexes(), cards.length)
+    const { goLeft, goRight, visibleIndexes } = useSlider(getVisibleIndexes(), cardData.length);
 
     return (
         <div className={css.root}>
@@ -47,21 +50,30 @@ export function WhyExactlyWe() {
                     style={{ transform: `rotate(${180}deg)` }}
                     disabled={!goLeft}
                     onClick={() => {
-                        if (goLeft) goLeft()
+                        if (goLeft) goLeft();
                     }}
                 >
                     <img src={chevron2} alt="" />
                 </button>
                 <div className={css.line}>
-                    {cards.map((card, i) => {
-                        if (visibleIndexes.includes(i)) return card
+                    {cardData.map((card, i) => {
+                        if (visibleIndexes.includes(i)) {
+                            return (
+                                <Card
+                                    key={card.id}
+                                    image={card.image}
+                                    text={card.text}
+                                />
+                            );
+                        }
+                        return null;
                     })}
                 </div>
                 <button
                     className={css.arrow}
                     disabled={!goRight}
                     onClick={() => {
-                        if (goRight) goRight()
+                        if (goRight) goRight();
                     }}
                 >
                     <img src={chevron2} alt="" />
@@ -69,5 +81,5 @@ export function WhyExactlyWe() {
             </div>
             <img src={imagePath} alt="" />
         </div>
-    )
+    );
 }

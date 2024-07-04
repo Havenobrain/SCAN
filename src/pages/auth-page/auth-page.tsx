@@ -1,5 +1,3 @@
-import { Footer } from "../../components/footer/footer";
-import { Header } from "../../components/header/header";
 import characters from "../../assets/img/Characters.png";
 import facebook from "../../assets/img/facebook.png";
 import google from "../../assets/img/google.png";
@@ -23,7 +21,6 @@ export function AuthPage() {
     return (
         <>
             <div className={css.container} style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-                <Header />
                 <div className={css.content} style={{ flexGrow: 1, display: "flex", alignItems: "center", margin: "20px 0" }}>
                     <div className={css.left}>
                         <h1 className={css.title}>Для оформления подписки на тариф, необходимо авторизоваться.</h1>
@@ -56,10 +53,20 @@ export function AuthPage() {
                                 text="Войти"
                                 onClick={async () => {
                                     try {
+                                        console.log("Attempting login with:", login, password);
                                         const data = await apiProvider.login(login, password);
-                                        localStorageService.auth.set(data);
+                                        console.log("Received auth data:", data);
+
+                                        localStorageService.auth.set({
+                                            accessToken: data.accessToken,
+                                            refreshToken: data.refreshToken || '',
+                                            expire: data.expire,
+                                        });
+
+                                        console.log("Saved auth data:", localStorageService.auth.get());
                                         navigate(nav.main);
                                     } catch (error) {
+                                        console.error("Login error:", error);
                                         setError((error as Error).message);
                                     }
                                 }}
@@ -82,7 +89,6 @@ export function AuthPage() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 }

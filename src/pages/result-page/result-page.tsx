@@ -1,5 +1,3 @@
-import { Footer } from "../../components/footer/footer";
-import { Header } from "../../components/header/header";
 import css from "./result-page.module.css";
 import woman from "../../assets/img/woman.svg";
 import { Documents } from "../../components/documents/documents";
@@ -27,7 +25,6 @@ const variants: Variant[] = [
     { date: new Date(), risks: 6, total: 6 },
     { date: new Date(), risks: 7, total: 7 },
     { date: new Date(), risks: 8, total: 8 },
-    //
     { date: new Date(), risks: 9, total: 9 },
     { date: new Date(), risks: 10, total: 10 },
     { date: new Date(), risks: 11, total: 11 },
@@ -54,14 +51,18 @@ export function ResultPage() {
 
     const [payload, updatePayload] = useImmer(initialData);
 
-    const { data, error, isLoading } = useFetch({ queryFn: () => apiProvider.objectsearch.histograms(payload) });
+    const { data, error, isLoading } = useFetch({ 
+        queryFn: () => {
+            console.log("Payload being sent:", payload);
+            return apiProvider.objectsearch.histograms(payload);
+        }
+    });
 
     console.log("data :>> ", data);
     console.log("error :>> ", error);
+
     return (
         <div className={css.container}>
-            <Header />
-
             <div>
                 <h1 className={css.title}>Ищем. Скоро будут результаты</h1>
                 <span className={css.label}>Поиск может занять некоторое время, просим сохранять терпение.</span>
@@ -86,7 +87,7 @@ export function ResultPage() {
                         {variants.map((variant, i) => {
                             if (visibleIndexes.includes(i)) {
                                 return (
-                                    <div className={css.column}>
+                                    <div key={`${variant.date.getTime()}_${i}`} className={css.column}>
                                         <p>{formatDate(variant.date)}</p>
                                         <p>{variant.total}</p>
                                         <p>{variant.risks}</p>
@@ -107,7 +108,6 @@ export function ResultPage() {
                 <h1 className={css.title}>Список документов</h1>
             </div>
             <Documents />
-            <Footer />
         </div>
     );
 }

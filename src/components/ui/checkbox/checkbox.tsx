@@ -1,11 +1,10 @@
 import { ChangeEventHandler } from "react";
 import css from "./checkbox.module.css";
-// import tick from "../../../assets/img/checkmark.png"
 import tick from "../../../assets/img/icons8-галочка-96 4.png";
 
 type Props = {
     label: string;
-    value: boolean;
+    checked: boolean; // Изменение здесь
     onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -15,7 +14,7 @@ export function Checkbox(props: Props) {
             <input
                 className={css.input}
                 style={{ flexBasis: "min-content" }}
-                checked={props.value}
+                checked={props.checked} // Изменение здесь
                 type="checkbox"
                 onChange={(ev) => props.onChange(ev)}
             />

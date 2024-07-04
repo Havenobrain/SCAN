@@ -1,23 +1,31 @@
-import { useEffect, useState } from "react";
-import { UseFetchOptions } from "./plate";
+import { useState, useEffect } from "react";
 
-export const useFetch = <T,>(options: UseFetchOptions<T>) => {
-    const [data, setData] = useState<T | undefined>(undefined);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
+type UseFetchOptions<T> = {
+    queryFn: () => Promise<T>;
+};
+
+export function useFetch<T>({ queryFn }: UseFetchOptions<T>) {
+    const [data, setData] = useState<T | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        setIsLoading(true);
-        (async () => {
+        const fetchData = async () => {
             try {
-                const response = await options.queryFn();
-                setData(response);
-            } catch (error) {
-                setError((error as Error).message);
+                console.log("Fetching data...");
+                const result = await queryFn();
+                console.log("Data fetched successfully:", result);
+                setData(result);
+                setIsLoading(false);
+            } catch (err) {
+                setError("Error fetching data");
+                setIsLoading(false);
+                console.error("Error fetching data:", err);
             }
-            setIsLoading(false);
-        })();
-    }, []);
+        };
 
-    return { data, isLoading, error };
-};
+        fetchData();
+    }, [queryFn]);
+
+    return { data, error, isLoading };
+}
