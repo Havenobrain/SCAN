@@ -4,7 +4,7 @@ import tick from "../../../assets/img/icons8-галочка-96 4.png";
 
 type Props = {
     label: string;
-    checked: boolean; // Изменение здесь
+    checked: boolean; 
     onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -14,7 +14,7 @@ export function Checkbox(props: Props) {
             <input
                 className={css.input}
                 style={{ flexBasis: "min-content" }}
-                checked={props.checked} // Изменение здесь
+                checked={props.checked}
                 type="checkbox"
                 onChange={(ev) => props.onChange(ev)}
             />

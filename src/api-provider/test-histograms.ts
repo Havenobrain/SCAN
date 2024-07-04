@@ -7,8 +7,8 @@ const fetchHistograms = async () => {
         searchContext: {
             term: "информация"
         },
-        intervalType: "Year", // Задаем корректный интервал
-        histogramTypes: ["TotalDocuments"] // Задаем корректный тип гистограммы
+        intervalType: "Year", 
+        histogramTypes: ["TotalDocuments"] 
     };
 
     const response = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {

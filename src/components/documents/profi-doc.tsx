@@ -13,13 +13,13 @@ type ProfiDocProps = {
 
 export function formatDate(date: Date) {
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Исправлено получение месяца
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
     return `${day}.${month}.${year}`;
 }
 
 export function ProfiDoc(props: ProfiDocProps) {
-    const parsedContent = parse(props.text); // Парсинг XML в HTML
+    const parsedContent = parse(props.text); 
 
     return (
         <div className={css.root}>

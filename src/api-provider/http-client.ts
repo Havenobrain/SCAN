@@ -8,7 +8,7 @@ export const httpClient = {
         const Authorization = `Bearer ${token}`;
         const fullUrl = baseUrl + url;
 
-        console.log("GET request to:", fullUrl); // Лог URL-адреса запроса
+        console.log("GET request to:", fullUrl); 
 
         return fetch(fullUrl, {
             method: "GET",
@@ -18,8 +18,8 @@ export const httpClient = {
         })
             .then(async (res) => {
                 const text = await res.text();
-                console.log("Response status:", res.status); // Лог статуса ответа
-                console.log("Response text:", text); // Лог текста ответа
+                console.log("Response status:", res.status); 
+                console.log("Response text:", text); 
                 if (res.ok) {
                     return JSON.parse(text) as T;
                 } else {
@@ -32,7 +32,7 @@ export const httpClient = {
         const Authorization = `Bearer ${token}`;
         const fullUrl = baseUrl + url;
 
-        console.log("POST request to:", fullUrl); // Лог URL-адреса запроса
+        console.log("POST request to:", fullUrl); 
 
         return fetch(fullUrl, {
             method: "POST",
@@ -44,8 +44,8 @@ export const httpClient = {
         })
             .then(async (res) => {
                 const text = await res.text();
-                console.log("Response status:", res.status); // Лог статуса ответа
-                console.log("Response text:", text); // Лог текста ответа
+                console.log("Response status:", res.status); 
+                console.log("Response text:", text); 
                 if (res.ok) {
                     return JSON.parse(text) as T;
                 } else {

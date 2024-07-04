@@ -29,17 +29,17 @@ export const apiProvider = {
     },
     objectsearch: {
         root: async (data: HistogramsPayload) => {
-            console.log("Sending root request with payload:", data); // Логирование payload
+            console.log("Sending root request with payload:", data); 
             return httpClient.post<HistogramsResponse>("/api/v1/objectsearch", data);
         },
         histograms: async (data: HistogramsPayload) => {
-            console.log("Sending histograms request with payload:", data); // Логирование payload
+            console.log("Sending histograms request with payload:", data);
             return httpClient.post<HistogramsResponse>("/api/v1/objectsearch/histograms", data);
         },
     },
     documents: {
         root: async (ids: string[]) => {
-            console.log("Sending documents request with ids:", ids); // Логирование ids
+            console.log("Sending documents request with ids:", ids); 
             return httpClient.post<ScanDoc[]>("/api/v1/documents", { ids });
         },
     },

@@ -24,7 +24,7 @@ export function SearchPage() {
         }
     
         try {
-            console.log("Sending payload:", JSON.stringify(payload, null, 2));  // Логирование отправляемых данных
+            console.log("Sending payload:", JSON.stringify(payload, null, 2));
             const response = await apiProvider.objectsearch.root(payload);
             console.log("response :>> ", response);
             navigate('/result', { state: { searchResults: response } });

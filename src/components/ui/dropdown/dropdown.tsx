@@ -26,7 +26,7 @@ export function Dropdown<T>(props: Props<T>) {
                 <div className={css.popover}>
                     {props.suggestions.map((suggestion, index) => (
                         <p
-                            key={index} // Добавляем уникальный ключ для каждого элемента
+                            key={index} 
                             onClick={() => {
                                 props.onSelect(suggestion.value);
                                 setOpen(false);

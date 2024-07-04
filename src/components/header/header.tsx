@@ -23,7 +23,7 @@ export function Header() {
                 </a>
                 <p className={css.link}>FAQ</p>
             </div>
-            <Plate /> {/* Plate рендерится здесь и не изменяется при каждом обновлении состояния в SearchPage */}
+            <Plate />
             <div className={css.profile}>
                 <div style={{ textAlign: "right" }}>
                     <p className={css.name}>Алексей А.</p>
