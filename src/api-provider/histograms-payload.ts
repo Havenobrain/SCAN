@@ -1,14 +1,13 @@
 export interface HistogramsResponse {
-    data: Datum[];
+    data: HistogramData[];
 }
 
-export interface Datum {
-    data: Datum2[];
+export interface HistogramData {
+    data: HistogramEntry[];
     histogramType: string;
 }
 
-export interface Datum2 {
+export interface HistogramEntry {
     date: string;
     value: number;
-    id: string; 
 }

@@ -30,17 +30,35 @@ export const apiProvider = {
     objectsearch: {
         root: async (data: HistogramsPayload) => {
             console.log("Sending root request with payload:", data); 
-            return httpClient.post<HistogramsResponse>("/api/v1/objectsearch", data);
+            try {
+                const response = await httpClient.post<HistogramsResponse>("/api/v1/objectsearch", data);
+                return response;
+            } catch (error) {
+                console.error("Object search root error:", error);
+                throw error;
+            }
         },
         histograms: async (data: HistogramsPayload) => {
             console.log("Sending histograms request with payload:", data);
-            return httpClient.post<HistogramsResponse>("/api/v1/objectsearch/histograms", data);
+            try {
+                const response = await httpClient.post<HistogramsResponse>("/api/v1/objectsearch/histograms", data);
+                return response;
+            } catch (error) {
+                console.error("Object search histograms error:", error);
+                throw error;
+            }
         },
     },
     documents: {
         root: async (ids: string[]) => {
             console.log("Sending documents request with ids:", ids); 
-            return httpClient.post<ScanDoc[]>("/api/v1/documents", { ids });
+            try {
+                const response = await httpClient.post<ScanDoc[]>("/api/v1/documents", { ids });
+                return response;
+            } catch (error) {
+                console.error("Documents request error:", error);
+                throw error;
+            }
         },
     },
 };

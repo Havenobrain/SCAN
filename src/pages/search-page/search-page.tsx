@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import css from "./search-page.module.css";
 import { Checkbox } from "../../components/ui/checkbox/checkbox";
@@ -8,29 +8,38 @@ import { RangePicker } from "../../components/ui/range-picker/range-picker";
 import { initialData } from "../result-page/use-payload";
 import { useImmer } from "use-immer";
 import { apiProvider } from "../../api-provider/api-provider";
+import { HistogramsResponse } from "../../api-provider/histograms-payload";
 
 export function SearchPage() {
     const [payload, updatePayload] = useImmer(initialData);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const isDisabled = () => {
-        return !payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn;
+        return !payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]?.inn;
     };
 
     const handleSearch = async () => {
-        if (isNaN(payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn)) {
+        if (isNaN(payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]?.inn || NaN)) {
             console.error("ИНН компании невалиден");
             return;
         }
     
+        setLoading(true);
+        setError(null);
+
         try {
             console.log("Sending payload:", JSON.stringify(payload, null, 2));
-            const response = await apiProvider.objectsearch.root(payload);
-            console.log("response :>> ", response);
+            const response: HistogramsResponse = await apiProvider.objectsearch.histograms(payload);
+            console.log("Response from server:", response);
             navigate('/result', { state: { searchResults: response } });
         } catch (error) {
             console.error("Error during search:", error);
+            setError('Error during search');
             navigate('/result', { state: { searchResults: null } });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -54,11 +63,13 @@ export function SearchPage() {
                         <form className={css.form}>
                             <div>
                                 <NumericField
-                                    value={payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn.toString()}
+                                    value={payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]?.inn?.toString() || ""}
                                     onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                                         updatePayload((draft) => {
-                                            draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn =
-                                                +ev.target.value;
+                                            if (draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]) {
+                                                draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inn =
+                                                    +ev.target.value;
+                                            }
                                         })
                                     }
                                     required
@@ -91,7 +102,7 @@ export function SearchPage() {
                                     <input
                                         className={css.input}
                                         type="number"
-                                        value={payload.limit.toString()}
+                                        value={payload.limit?.toString() || ""}
                                         onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
                                                 draft.limit = Number(ev.target.value);
@@ -116,12 +127,14 @@ export function SearchPage() {
                                     <Checkbox
                                         label="Признак максимальной полноты"
                                         checked={
-                                            payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].maxFullness
+                                            payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]?.maxFullness ?? false
                                         }
                                         onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
-                                                draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].maxFullness =
-                                                    ev.target.checked;
+                                                if (draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]) {
+                                                    draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].maxFullness =
+                                                        ev.target.checked;
+                                                }
                                             });
                                         }}
                                     />
@@ -129,18 +142,20 @@ export function SearchPage() {
                                         label="Упоминания в бизнес-контексте"
                                         checked={
                                             payload.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]
-                                                .inBusinessNews
+                                                ?.inBusinessNews ?? false
                                         }
                                         onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
-                                                draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inBusinessNews =
-                                                    ev.target.checked;
+                                                if (draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0]) {
+                                                    draft.searchContext.targetSearchEntitiesContext.targetSearchEntities[0].inBusinessNews =
+                                                        ev.target.checked;
+                                                }
                                             });
                                         }}
                                     />
                                     <Checkbox
                                         label="Главная роль в публикации"
-                                        checked={payload.searchContext.targetSearchEntitiesContext.onlyMainRole}
+                                        checked={payload.searchContext.targetSearchEntitiesContext.onlyMainRole ?? false}
                                         onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                                             updatePayload((draft) => {
                                                 draft.searchContext.targetSearchEntitiesContext.onlyMainRole = ev.target.checked;
@@ -148,7 +163,7 @@ export function SearchPage() {
                                         }}
                                     />
                                     <Checkbox
-                                        checked={payload.searchContext.targetSearchEntitiesContext.onlyWithRiskFactors}
+                                        checked={payload.searchContext.targetSearchEntitiesContext.onlyWithRiskFactors ?? false}
                                         label="Публикации только с риск-факторами"
                                         onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                                             updatePayload((draft) => {
@@ -193,6 +208,8 @@ export function SearchPage() {
                                 >
                                     Поиск
                                 </button>
+                                {loading && <p>Loading...</p>}
+                                {error && <p style={{ color: "red" }}>{error}</p>}
                             </div>
                         </form>
                     </div>

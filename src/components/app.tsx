@@ -6,7 +6,6 @@ import { ResultPage } from "../pages/result-page/result-page";
 import { localStorageService } from "../services/local-storage-service/local-storage-service";
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
-import { DocumentFetcher } from "./DocumentFetcher";
 
 export function App() {
     return (
@@ -18,7 +17,6 @@ export function App() {
                 <Route element={<PrivateRoute />}>
                     <Route path="/search" element={<SearchPage />} />
                     <Route path="/result" element={<ResultPage />} />
-                    <Route path="/documents" element={<DocumentFetcher />} />
                 </Route>
             </Routes>
             <Footer />

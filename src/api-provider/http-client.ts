@@ -32,7 +32,8 @@ export const httpClient = {
         const Authorization = `Bearer ${token}`;
         const fullUrl = baseUrl + url;
 
-        console.log("POST request to:", fullUrl); 
+        console.log("POST request to:", fullUrl);
+        console.log("POST data:", JSON.stringify(data, null, 2)); 
 
         return fetch(fullUrl, {
             method: "POST",
@@ -51,6 +52,10 @@ export const httpClient = {
                 } else {
                     throw new Error(text);
                 }
+            })
+            .catch((error) => {
+                console.error("POST request error:", error);
+                throw error;
             });
     },
 };
