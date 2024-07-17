@@ -37,7 +37,7 @@ export function SearchPage() {
         } catch (error) {
             console.error("Error during search:", error);
             setError('Error during search');
-            navigate('/result', { state: { searchResults: null } });
+            navigate('/result', { state: { error } });
         } finally {
             setLoading(false);
         }

@@ -5,10 +5,6 @@ import { formatDate } from "../../components/documents/profi-doc";
 import { useSlider } from "../../components/why-exactly-we/use-slider";
 import chevron2 from "../../assets/img/chevron-right.png";
 import { useBodyWidth } from "../../components/why-exactly-we/why-exactly-we";
-import { useFetch } from "../../components/header/useFetch";
-import { apiProvider } from "../../api-provider/api-provider";
-import { useImmer } from "use-immer";
-import { initialData } from "./use-payload";
 import { WorkDoc } from "../../components/documents/work-doc";
 import { ProfiDoc } from "../../components/documents/profi-doc";
 
@@ -52,18 +48,6 @@ export function ResultPage() {
         return 6;
     };
     const { goLeft, goRight, visibleIndexes } = useSlider(getIndexes(), 20);
-
-    const [payload, updatePayload] = useImmer(initialData);
-
-    const { data, error, isLoading } = useFetch({
-        queryFn: () => {
-            console.log("Payload being sent:", payload);
-            return apiProvider.objectsearch.histograms(payload);
-        }
-    });
-
-    console.log("data :>> ", data);
-    console.log("error :>> ", error);
 
     return (
         <div className={css.container}>
@@ -115,9 +99,7 @@ export function ResultPage() {
             <ProfiDoc />
             <WorkDoc /> 
             </div>
-            {isLoading && <p>Loading...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {!isLoading && !error && <Documents />}
+            <Documents />
         </div>
     );
 }
