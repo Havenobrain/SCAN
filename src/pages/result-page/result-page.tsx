@@ -96,8 +96,8 @@ export function ResultPage() {
                 <h1 className={css.title}>Список документов</h1>
             </div >
             <div className={css.documentsRow}>
-            <ProfiDoc />
-            <WorkDoc /> 
+            {/* <ProfiDoc />
+            <WorkDoc />  */}
             </div>
             <Documents />
         </div>

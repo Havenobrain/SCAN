@@ -14,7 +14,7 @@ export const initialData: HistogramsPayload = {
                     type: "company",
                     sparkId: null,
                     entityId: null,
-                    inn: 0,
+                    inn: 7710137066,
                     maxFullness: true,
                     inBusinessNews: null,
                 }
@@ -34,27 +34,27 @@ export const initialData: HistogramsPayload = {
             }
         },
         searchEntitiesFilter: {
-            and: [{ type: "company" }],
-            or: [{ type: "company" }],
-            not: [{ type: "company" }]
+            and: [],
+            or: [],
+            not: []
         },
         locationsFilter: {
-            and: [{ countryCode: "string", regionCode: 0 }],
-            or: [{ countryCode: "string", regionCode: 0 }],
-            not: [{ countryCode: "string", regionCode: 0 }]
+            and: [],
+            or: [],
+            not: []
         },
         themesFilter: {
-            and: [{ entityId: 0, tonality: "any" }],
-            or: [{ entityId: 0, tonality: "any" }],
-            not: [{ entityId: 0, tonality: "any" }]
+            and: [],
+            or: [],
+            not: []
         }
     },
     searchArea: {
-        includedSources: [0],
-        excludedSources: [0],
-        includedSourceGroups: [0],
-        excludedSourceGroups: [0],
-        includedDistributionMethods: [0],
+        includedSources: [],
+        excludedSources: [],
+        includedSourceGroups: [],
+        excludedSourceGroups: [],
+        includedDistributionMethods: [],
         excludedDistributionMethods: []
     },
     attributeFilters: {

@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { apiProvider } from '../../api-provider/api-provider';
+import { WorkDoc } from "../../components/documents/work-doc";
+import { ProfiDoc } from "../../components/documents/profi-doc";
 
 const Documents = () => {
   const [documents, setDocuments] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const {state} = useLocation()
 
-  useEffect(() => {
-    const {searchResults, error} = state
-    if (error) {
-      setError('Error data fetching: ' + error.message)
-    } else {
-      setDocuments(searchResults.data)
-    }
+  useEffect(async () => {
+    const {payload} = state
+    const {data, error, isLoading} = await apiProvider.objectsearch.root(payload)
   }, []);
 
   if (error) {

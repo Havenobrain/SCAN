@@ -26,21 +26,21 @@ export function SearchPage() {
             return;
         }
     
-        setLoading(true);
-        setError(null);
+        // setLoading(true);
+        // setError(null);
 
-        try {
-            console.log("Sending payload:", JSON.stringify(payload, null, 2));
-            const response: HistogramsResponse = await apiProvider.objectsearch.histograms(payload);
-            console.log("Response from server:", response);
-            navigate('/result', { state: { searchResults: response } });
-        } catch (error) {
-            console.error("Error during search:", error);
-            setError('Error during search');
-            navigate('/result', { state: { error } });
-        } finally {
-            setLoading(false);
-        }
+        navigate('/result', { state: { payload: payload } });
+        // try {
+        //     console.log("Sending payload:", JSON.stringify(payload, null, 2));
+        //     const response: HistogramsResponse = await apiProvider.objectsearch.histograms(payload);
+        //     console.log("Response from server:", response);
+        // } catch (error) {
+        //     console.error("Error during search:", error);
+        //     setError('Error during search');
+        //     navigate('/result', { state: { error } });
+        // } finally {
+        //     setLoading(false);
+        // }
     };
 
     const suggestions = [
@@ -74,7 +74,6 @@ export function SearchPage() {
                                     }
                                     required
                                     label="ИНН компании"
-                                    placeholder="placeholder"
                                 />
                                 <label>
                                     <p className={css.label}>Тональность</p>
