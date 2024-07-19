@@ -1,17 +1,31 @@
+import css from './documents.module.css'
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { apiProvider } from '../../api-provider/api-provider';
-import { WorkDoc } from "../../components/documents/work-doc";
 import { ProfiDoc } from "../../components/documents/profi-doc";
 
 const Documents = () => {
   const [documents, setDocuments] = useState<any[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const {state} = useLocation()
 
-  useEffect(async () => {
+  useEffect(() => {
     const {payload} = state
-    const {data, error, isLoading} = await apiProvider.objectsearch.root(payload)
+    async function fetchDocuments() {
+      try {
+        setLoading(true)
+        const objectsList = await apiProvider.objectsearch.root(payload)
+        const docIds = objectsList.items.map(it=>it.encodedId).slice(0, 100)
+        setDocuments(await apiProvider.documents.root(docIds) || [])
+
+      } catch (err) {
+        setError(err.message || 'Error fetching documents')
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchDocuments()
   }, []);
 
   if (error) {
@@ -20,14 +34,15 @@ const Documents = () => {
 
   return (
     <div>
-      {documents.length === 0 ? (
+      {isLoading && <div>Loading...</div>}
+      {!isLoading && documents.length === 0 ? (
         <div>No documents found</div>
       ) : (
-        <ul>
+        <div className={css.cards}>
           {documents.map((doc, index) => (
-            <li key={index}>{doc.title}</li>
+            <ProfiDoc doc={doc} />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

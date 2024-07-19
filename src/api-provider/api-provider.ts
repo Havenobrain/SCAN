@@ -1,5 +1,5 @@
 import { HistogramsPayload } from "./histograms";
-import { HistogramsResponse } from "./histograms-payload";
+import { HistogramsResponse, ObjectSearchResponse } from "./histograms-payload";
 import { httpClient } from "./http-client";
 import { ScanDoc } from "../components/documents/scan-doc";
 
@@ -31,7 +31,7 @@ export const apiProvider = {
         root: async (data: HistogramsPayload) => {
             console.log("Sending root request with payload:", data); 
             try {
-                const response = await httpClient.post<HistogramsResponse>("/api/v1/objectsearch", data);
+                const response = await httpClient.post<ObjectSearchResponse>("/api/v1/objectsearch", data);
                 return response;
             } catch (error) {
                 console.error("Object search root error:", error);

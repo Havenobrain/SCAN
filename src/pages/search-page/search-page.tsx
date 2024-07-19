@@ -25,22 +25,8 @@ export function SearchPage() {
             console.error("ИНН компании невалиден");
             return;
         }
-    
-        // setLoading(true);
-        // setError(null);
 
         navigate('/result', { state: { payload: payload } });
-        // try {
-        //     console.log("Sending payload:", JSON.stringify(payload, null, 2));
-        //     const response: HistogramsResponse = await apiProvider.objectsearch.histograms(payload);
-        //     console.log("Response from server:", response);
-        // } catch (error) {
-        //     console.error("Error during search:", error);
-        //     setError('Error during search');
-        //     navigate('/result', { state: { error } });
-        // } finally {
-        //     setLoading(false);
-        // }
     };
 
     const suggestions = [
