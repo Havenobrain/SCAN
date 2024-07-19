@@ -26,7 +26,8 @@ export function ResultPage() {
                 const { data } = await apiProvider.objectsearch.histograms(payload)
                 setVariants(data.length ? data[0].data : [])
             } catch (err) {
-                setError(err.message || 'Error while fetching data')
+                const error = err as Error
+                setError(error.message || 'Error while fetching data')
                 console.error(err)
             } finally {
                 setLoading(false)

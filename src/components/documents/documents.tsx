@@ -20,7 +20,8 @@ const Documents = () => {
         setDocuments(await apiProvider.documents.root(docIds) || [])
 
       } catch (err) {
-        setError(err.message || 'Error fetching documents')
+        const error = err as Error
+        setError(error.message || 'Error fetching documents')
       } finally {
         setLoading(false)
       }
@@ -39,7 +40,7 @@ const Documents = () => {
         <div>No documents found</div>
       ) : (
         <div className={css.cards}>
-          {documents.map((doc, index) => (
+          {documents.map(doc => (
             <ProfiDoc doc={doc} />
           ))}
         </div>

@@ -21,7 +21,7 @@ declare type Params = {doc: ScanDoc}
 export function ProfiDoc({doc}: Params) {
     const document = doc.ok
     const DOMParse = new DOMParser();
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState('');
     useEffect(() => {
         const xmlDoc = DOMParse.parseFromString(document.content.markup, 'application/xml');
         const htmlContent = new XMLSerializer().serializeToString(xmlDoc.documentElement)
