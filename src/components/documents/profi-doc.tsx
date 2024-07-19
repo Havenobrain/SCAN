@@ -40,8 +40,7 @@ export function ProfiDoc({doc}: Params) {
                         {document.attributes.isAnnouncement && <div className={css.badge}>Анонсы</div>}
                         {document.attributes.isDigest && <div className={css.badge}>Дайджесты</div>}
                             {/* <img src={photo1} alt="" /> */}
-                                <div className={css.text} dangerouslySetInnerHTML={{__html: content}}>
-                                </div>
+                            <div className={css.text} dangerouslySetInnerHTML={{__html: content}}></div>
                 <div className={css.words}>{document.attributes.wordCount} слов(а)</div>
                 <a href={document.url}><button className={css.button}>Читать в источнике</button></a>
             </div>
